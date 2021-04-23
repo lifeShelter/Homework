@@ -17,9 +17,11 @@ class SearchListViewModel {
     // input
     let searchBarText = PublishRelay<String>()
     let tapSearchButton = PublishRelay<Void>()
+    let searchBarBeginEdit = PublishRelay<Void>()
     
     // output
-    
+    let historyRelay = BehaviorRelay<Array<String>>(value: [])
+    let showHistory = PublishRelay<Void>()
     
     
     init() {
@@ -31,19 +33,33 @@ class SearchListViewModel {
                 print(str)
                 self?.addHistory(str)
             }).disposed(by: disposeBag)
+        historyRelay.accept(getHistory())
+        searchBarBeginEdit.bind(to: showHistory).disposed(by: disposeBag)
     }
     
     
     private func addHistory(_ str:String) {
-        if let history = UserDefaults.standard.array(forKey: "history") as? Array<String> {
-            var historySet:Set<String> = Set(history.map {$0})
-            historySet.insert(str)
-            print("historySet = \(historySet)")
-            UserDefaults.standard.setValue(Array(historySet), forKey: "history")
-            UserDefaults.standard.synchronize()
-        } else {
+        let history = getHistory()
+        if history.count == 0 {
             UserDefaults.standard.setValue( [str], forKey: "history")
             UserDefaults.standard.synchronize()
+            return
+        }
+
+        var historySet:Set<String> = Set(history.map {$0})
+        historySet.insert(str)
+//        print("historySet = \(historySet)")
+        UserDefaults.standard.setValue(Array(historySet), forKey: "history")
+        UserDefaults.standard.synchronize()
+        historyRelay.accept(Array(historySet))
+    }
+    
+    
+    private func getHistory() -> Array<String> {
+        if let history = UserDefaults.standard.array(forKey: "history") as? Array<String> {
+            return history
+        } else {
+            return []
         }
     }
 }
