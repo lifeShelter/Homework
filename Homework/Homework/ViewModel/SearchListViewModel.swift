@@ -18,6 +18,8 @@ class SearchListViewModel {
     let searchBarText = PublishRelay<String>()
     let tapSearchButton = PublishRelay<Void>()
     let searchBarBeginEdit = PublishRelay<Void>()
+    let filterType = BehaviorRelay<FilterEnum>(value:.all)
+    let sortType = BehaviorRelay<SortEnum>(value:.title)
     
     // output
     let historyRelay = BehaviorRelay<Array<String>>(value: [])
@@ -35,6 +37,12 @@ class SearchListViewModel {
             }).disposed(by: disposeBag)
         historyRelay.accept(getHistory())
         searchBarBeginEdit.bind(to: showHistory).disposed(by: disposeBag)
+        filterType.subscribe(onNext:{ filter in
+            print(filter)
+        }).disposed(by: disposeBag)
+        sortType.subscribe(onNext:{ sort in
+            print(sort)
+        }).disposed(by: disposeBag)
     }
     
     

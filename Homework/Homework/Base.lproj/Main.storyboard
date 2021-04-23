@@ -34,18 +34,78 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Mj2-ge-G8t">
+                                <rect key="frame" x="0.0" y="100" width="414" height="762"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FilterCell" id="Wqh-8a-EBz" customClass="FilterTableViewCell" customModule="Homework" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="55.5" width="414" height="36.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Wqh-8a-EBz" id="wNJ-WO-XRD">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="36.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qfx-Jr-bhZ">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="36.5"/>
+                                                    <subviews>
+                                                        <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="All" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c4C-m5-0Dx">
+                                                            <rect key="frame" x="0.0" y="0.0" width="331" height="36.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A2N-e1-esW">
+                                                            <rect key="frame" x="331" y="0.0" width="83" height="36.5"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                            <state key="normal" title="정렬"/>
+                                                            <connections>
+                                                                <action selector="sortButtonAction:" destination="Wqh-8a-EBz" eventType="touchUpInside" id="gf9-wn-rxq"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                </stackView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WmY-Tg-qE6">
+                                                    <rect key="frame" x="0.0" y="0.0" width="331" height="36.5"/>
+                                                    <connections>
+                                                        <action selector="filterButtonAction:" destination="Wqh-8a-EBz" eventType="touchUpInside" id="j52-gh-bGI"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="qfx-Jr-bhZ" firstAttribute="leading" secondItem="wNJ-WO-XRD" secondAttribute="leading" id="1DA-LF-xzZ"/>
+                                                <constraint firstItem="WmY-Tg-qE6" firstAttribute="trailing" secondItem="c4C-m5-0Dx" secondAttribute="trailing" id="1oK-e7-IDQ"/>
+                                                <constraint firstItem="qfx-Jr-bhZ" firstAttribute="top" secondItem="wNJ-WO-XRD" secondAttribute="top" id="8fU-as-A9m"/>
+                                                <constraint firstItem="WmY-Tg-qE6" firstAttribute="bottom" secondItem="c4C-m5-0Dx" secondAttribute="bottom" id="Hoj-RO-Ibv"/>
+                                                <constraint firstItem="WmY-Tg-qE6" firstAttribute="leading" secondItem="c4C-m5-0Dx" secondAttribute="leading" id="Ssz-Zl-DzV"/>
+                                                <constraint firstItem="WmY-Tg-qE6" firstAttribute="top" secondItem="c4C-m5-0Dx" secondAttribute="top" id="V8Q-zT-Vcv"/>
+                                                <constraint firstAttribute="trailing" secondItem="qfx-Jr-bhZ" secondAttribute="trailing" id="a1J-qF-VXL"/>
+                                                <constraint firstItem="c4C-m5-0Dx" firstAttribute="width" secondItem="wNJ-WO-XRD" secondAttribute="width" multiplier="0.8" id="tdu-tg-1IG"/>
+                                                <constraint firstAttribute="bottom" secondItem="qfx-Jr-bhZ" secondAttribute="bottom" id="zX5-uu-9Yh"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="sortButton" destination="A2N-e1-esW" id="2PN-Tb-sjA"/>
+                                            <outlet property="textField" destination="c4C-m5-0Dx" id="5hK-qA-od9"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="ePn-Xj-0dF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="RAv-9f-dKb"/>
+                            <constraint firstItem="Mj2-ge-G8t" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="brp-c4-oLw"/>
                             <constraint firstItem="ePn-Xj-0dF" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="cjk-Le-wB2"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Mj2-ge-G8t" secondAttribute="bottom" id="mO2-hC-IJz"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ePn-Xj-0dF" secondAttribute="trailing" id="ss0-hK-qV7"/>
+                            <constraint firstItem="Mj2-ge-G8t" firstAttribute="top" secondItem="ePn-Xj-0dF" secondAttribute="bottom" id="tzX-2W-kj2"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Mj2-ge-G8t" secondAttribute="trailing" id="x0w-Ft-UTG"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="searchBar" destination="Zfg-OH-Hg9" id="O38-iX-GCb"/>
                         <outlet property="searchButton" destination="x6E-pu-1Pg" id="sIq-e7-gBI"/>
+                        <outlet property="tableView" destination="Mj2-ge-G8t" id="G3l-IL-jgs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
