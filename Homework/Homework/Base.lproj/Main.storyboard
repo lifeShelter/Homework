@@ -251,6 +251,9 @@
                                                                 <rect key="frame" x="227.5" y="0.0" width="146.5" height="36"/>
                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                                 <state key="normal" title="이동"/>
+                                                                <connections>
+                                                                    <segue destination="6te-zt-ECi" kind="show" id="YmB-jf-yiw"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>
@@ -300,6 +303,43 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NZp-FE-0sf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1650.7246376811595" y="83.705357142857139"/>
+        </scene>
+        <!--title-->
+        <scene sceneID="7gh-Xl-tou">
+            <objects>
+                <viewController id="6te-zt-ECi" customClass="WebPageViewController" customModule="Homework" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Olp-PY-PK2">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W25-DS-BOF">
+                                <rect key="frame" x="10" y="98" width="394" height="754"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ydA-qC-cdt"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="W25-DS-BOF" firstAttribute="leading" secondItem="ydA-qC-cdt" secondAttribute="leading" constant="10" id="Jg2-Ph-h9O"/>
+                            <constraint firstItem="ydA-qC-cdt" firstAttribute="trailing" secondItem="W25-DS-BOF" secondAttribute="trailing" constant="10" id="TZj-N1-yBw"/>
+                            <constraint firstItem="ydA-qC-cdt" firstAttribute="bottom" secondItem="W25-DS-BOF" secondAttribute="bottom" constant="10" id="Z2R-wV-u4l"/>
+                            <constraint firstItem="W25-DS-BOF" firstAttribute="top" secondItem="ydA-qC-cdt" secondAttribute="top" constant="10" id="foK-g5-4QS"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="title" id="5Yc-8R-EM0">
+                        <barButtonItem key="backBarButtonItem" title="back" id="bnk-36-9TB"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="webView" destination="W25-DS-BOF" id="UuH-bf-gNP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T3G-vk-yYq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2429" y="84"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="5E6-NN-l9F">

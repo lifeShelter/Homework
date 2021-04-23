@@ -13,6 +13,7 @@
 		304FB3F42633092200C2B364 /* FilterEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304FB3F32633092200C2B364 /* FilterEnum.swift */; };
 		308C7B2A263312B900CB4605 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308C7B29263312B900CB4605 /* ListTableViewCell.swift */; };
 		308C7B2F2633148300CB4605 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308C7B2E2633148300CB4605 /* DetailViewController.swift */; };
+		308C7B34263318CB00CB4605 /* WebPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308C7B33263318CB00CB4605 /* WebPageViewController.swift */; };
 		30ACB2772632ABD7003F1B60 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30ACB2762632ABD7003F1B60 /* AppDelegate.swift */; };
 		30ACB27B2632ABD7003F1B60 /* SearchListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30ACB27A2632ABD7003F1B60 /* SearchListViewController.swift */; };
 		30ACB27E2632ABD7003F1B60 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30ACB27C2632ABD7003F1B60 /* Main.storyboard */; };
@@ -52,6 +53,7 @@
 		304FB3F32633092200C2B364 /* FilterEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterEnum.swift; sourceTree = "<group>"; };
 		308C7B29263312B900CB4605 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		308C7B2E2633148300CB4605 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		308C7B33263318CB00CB4605 /* WebPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPageViewController.swift; sourceTree = "<group>"; };
 		30ACB2732632ABD7003F1B60 /* Homework.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Homework.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30ACB2762632ABD7003F1B60 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		30ACB27A2632ABD7003F1B60 /* SearchListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListViewController.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				304FB3E52632FC0600C2B364 /* Cell */,
 				30ACB27A2632ABD7003F1B60 /* SearchListViewController.swift */,
 				308C7B2E2633148300CB4605 /* DetailViewController.swift */,
+				308C7B33263318CB00CB4605 /* WebPageViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -469,6 +472,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				308C7B34263318CB00CB4605 /* WebPageViewController.swift in Sources */,
 				308C7B2A263312B900CB4605 /* ListTableViewCell.swift in Sources */,
 				304FB3F42633092200C2B364 /* FilterEnum.swift in Sources */,
 				30ACB27B2632ABD7003F1B60 /* SearchListViewController.swift in Sources */,
