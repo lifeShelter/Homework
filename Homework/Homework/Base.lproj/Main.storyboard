@@ -9,28 +9,44 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Search List View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Homework" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="SearchListViewController" customModule="Homework" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hello" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mSl-7m-4al">
-                                <rect key="frame" x="189" y="442.5" width="36.5" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ePn-Xj-0dF">
+                                <rect key="frame" x="0.0" y="44" width="414" height="56"/>
+                                <subviews>
+                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Zfg-OH-Hg9">
+                                        <rect key="frame" x="0.0" y="0.0" width="354" height="56"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </searchBar>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x6E-pu-1Pg">
+                                        <rect key="frame" x="354" y="0.0" width="60" height="56"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="CBR-WC-Z6O"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <state key="normal" title="검색"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="mSl-7m-4al" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="5lo-R6-qJG"/>
-                            <constraint firstItem="mSl-7m-4al" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="swM-to-SqK"/>
+                            <constraint firstItem="ePn-Xj-0dF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="RAv-9f-dKb"/>
+                            <constraint firstItem="ePn-Xj-0dF" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="cjk-Le-wB2"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ePn-Xj-0dF" secondAttribute="trailing" id="ss0-hK-qV7"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="searchBar" destination="Zfg-OH-Hg9" id="O38-iX-GCb"/>
+                        <outlet property="searchButton" destination="x6E-pu-1Pg" id="sIq-e7-gBI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		304FB3AD2632B61900C2B364 /* SearchListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304FB3AC2632B61900C2B364 /* SearchListViewModel.swift */; };
 		30ACB2772632ABD7003F1B60 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30ACB2762632ABD7003F1B60 /* AppDelegate.swift */; };
-		30ACB27B2632ABD7003F1B60 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30ACB27A2632ABD7003F1B60 /* ViewController.swift */; };
+		30ACB27B2632ABD7003F1B60 /* SearchListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30ACB27A2632ABD7003F1B60 /* SearchListViewController.swift */; };
 		30ACB27E2632ABD7003F1B60 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30ACB27C2632ABD7003F1B60 /* Main.storyboard */; };
 		30ACB2802632ABD8003F1B60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30ACB27F2632ABD8003F1B60 /* Assets.xcassets */; };
 		30ACB2832632ABD8003F1B60 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30ACB2812632ABD8003F1B60 /* LaunchScreen.storyboard */; };
@@ -40,9 +41,10 @@
 		0C6750380326895E2AAA6969 /* Pods_Homework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Homework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B02EA3EE8972B9CB23069D8 /* Pods_HomeworkTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HomeworkTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2120499BA7D5B8F344C325F8 /* Pods-Homework.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Homework.debug.xcconfig"; path = "Target Support Files/Pods-Homework/Pods-Homework.debug.xcconfig"; sourceTree = "<group>"; };
+		304FB3AC2632B61900C2B364 /* SearchListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListViewModel.swift; sourceTree = "<group>"; };
 		30ACB2732632ABD7003F1B60 /* Homework.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Homework.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30ACB2762632ABD7003F1B60 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		30ACB27A2632ABD7003F1B60 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		30ACB27A2632ABD7003F1B60 /* SearchListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListViewController.swift; sourceTree = "<group>"; };
 		30ACB27D2632ABD7003F1B60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		30ACB27F2632ABD8003F1B60 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		30ACB2822632ABD8003F1B60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -89,6 +91,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		304FB3A32632B5AE00C2B364 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				30ACB27A2632ABD7003F1B60 /* SearchListViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		304FB3A42632B5B500C2B364 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				304FB3AC2632B61900C2B364 /* SearchListViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		304FB3A52632B5BC00C2B364 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		304FB3B42632B63700C2B364 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		30ACB26A2632ABD7003F1B60 = {
 			isa = PBXGroup;
 			children = (
@@ -114,8 +146,11 @@
 		30ACB2752632ABD7003F1B60 /* Homework */ = {
 			isa = PBXGroup;
 			children = (
+				304FB3B42632B63700C2B364 /* Common */,
+				304FB3A52632B5BC00C2B364 /* Model */,
+				304FB3A42632B5B500C2B364 /* ViewModel */,
+				304FB3A32632B5AE00C2B364 /* View */,
 				30ACB2762632ABD7003F1B60 /* AppDelegate.swift */,
-				30ACB27A2632ABD7003F1B60 /* ViewController.swift */,
 				30ACB27C2632ABD7003F1B60 /* Main.storyboard */,
 				30ACB27F2632ABD8003F1B60 /* Assets.xcassets */,
 				30ACB2812632ABD8003F1B60 /* LaunchScreen.storyboard */,
@@ -403,8 +438,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				30ACB27B2632ABD7003F1B60 /* ViewController.swift in Sources */,
+				30ACB27B2632ABD7003F1B60 /* SearchListViewController.swift in Sources */,
 				30ACB2772632ABD7003F1B60 /* AppDelegate.swift in Sources */,
+				304FB3AD2632B61900C2B364 /* SearchListViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -510,7 +546,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -565,7 +601,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -582,6 +618,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4798MSP7R7;
 				INFOPLIST_FILE = Homework/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -601,6 +638,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4798MSP7R7;
 				INFOPLIST_FILE = Homework/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
