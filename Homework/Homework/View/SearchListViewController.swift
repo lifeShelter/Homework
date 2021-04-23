@@ -11,13 +11,17 @@ import RxCocoa
 
 
 class SearchListViewController: UIViewController {
+    private var disposeBag = DisposeBag()
+    private let viewModel = SearchListViewModel()
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var searchButton: UIButton!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        setupDefaults()
+        inputBinding()
+        outputBinding()
     }
 
     
@@ -32,7 +36,9 @@ class SearchListViewController: UIViewController {
     
     
     private func inputBinding() {
-        
+        searchBar.rx.text.orEmpty.bind(to: viewModel.searchBarText).disposed(by: disposeBag)
+        searchBar.rx.searchButtonClicked.bind(to: viewModel.tapSearchButton).disposed(by: disposeBag)
+        searchButton.rx.tap.bind(to: viewModel.tapSearchButton).disposed(by: disposeBag)
     }
     
     

@@ -20,9 +20,9 @@
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ePn-Xj-0dF">
                                 <rect key="frame" x="0.0" y="44" width="414" height="56"/>
                                 <subviews>
-                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Zfg-OH-Hg9">
+                                    <searchBar contentMode="redraw" placeholder="검색어를 입력해주세요" translatesAutoresizingMaskIntoConstraints="NO" id="Zfg-OH-Hg9">
                                         <rect key="frame" x="0.0" y="0.0" width="354" height="56"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="search"/>
                                     </searchBar>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x6E-pu-1Pg">
                                         <rect key="frame" x="354" y="0.0" width="60" height="56"/>
