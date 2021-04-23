@@ -125,7 +125,6 @@ extension SearchListViewController:UITableViewDelegate {
         filterDropDown.selectionAction = { [weak self] index, item in
             cell.textField.text = item
             self?.viewModel.filterType.accept(FilterEnum(rawValue: item) ?? .all)
-            self?.filterDropDown.clearSelection()
         }
         cell.sortAction  = { [weak self] in
             self?.showActionSheet()
@@ -133,6 +132,7 @@ extension SearchListViewController:UITableViewDelegate {
         cell.filterAction  = { [weak self] in
             self?.filterDropDown.show()
         }
+        cell.textField.text = filterDropDown.selectedItem ?? "All"
         return cell
     }
     
