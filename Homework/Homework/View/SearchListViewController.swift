@@ -108,7 +108,11 @@ extension SearchListViewController:UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "listCell") as? ListTableViewCell else  {
+            print("listcell load fail")
+            return UITableViewCell()
+        }
+        return cell
     }
     
 }
@@ -139,6 +143,11 @@ extension SearchListViewController:UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
+    }
+    
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 120
     }
 }
 

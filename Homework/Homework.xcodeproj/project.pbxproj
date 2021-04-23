@@ -11,6 +11,7 @@
 		304FB3E72632FC1C00C2B364 /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304FB3E62632FC1C00C2B364 /* FilterTableViewCell.swift */; };
 		304FB3EF263308FA00C2B364 /* SortEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304FB3EE263308FA00C2B364 /* SortEnum.swift */; };
 		304FB3F42633092200C2B364 /* FilterEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304FB3F32633092200C2B364 /* FilterEnum.swift */; };
+		308C7B2A263312B900CB4605 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308C7B29263312B900CB4605 /* ListTableViewCell.swift */; };
 		30ACB2772632ABD7003F1B60 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30ACB2762632ABD7003F1B60 /* AppDelegate.swift */; };
 		30ACB27B2632ABD7003F1B60 /* SearchListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30ACB27A2632ABD7003F1B60 /* SearchListViewController.swift */; };
 		30ACB27E2632ABD7003F1B60 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30ACB27C2632ABD7003F1B60 /* Main.storyboard */; };
@@ -48,6 +49,7 @@
 		304FB3E62632FC1C00C2B364 /* FilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
 		304FB3EE263308FA00C2B364 /* SortEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortEnum.swift; sourceTree = "<group>"; };
 		304FB3F32633092200C2B364 /* FilterEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterEnum.swift; sourceTree = "<group>"; };
+		308C7B29263312B900CB4605 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		30ACB2732632ABD7003F1B60 /* Homework.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Homework.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30ACB2762632ABD7003F1B60 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		30ACB27A2632ABD7003F1B60 /* SearchListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListViewController.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				304FB3E62632FC1C00C2B364 /* FilterTableViewCell.swift */,
+				308C7B29263312B900CB4605 /* ListTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -463,6 +466,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				308C7B2A263312B900CB4605 /* ListTableViewCell.swift in Sources */,
 				304FB3F42633092200C2B364 /* FilterEnum.swift in Sources */,
 				30ACB27B2632ABD7003F1B60 /* SearchListViewController.swift in Sources */,
 				304FB3EF263308FA00C2B364 /* SortEnum.swift in Sources */,
