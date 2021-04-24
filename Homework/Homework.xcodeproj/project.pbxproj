@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		302C1E5826343B8E0064E4B4 /* String+htmlEscaped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302C1E5726343B8E0064E4B4 /* String+htmlEscaped.swift */; };
+		302C1E6026343D850064E4B4 /* UIColor+hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302C1E5F26343D850064E4B4 /* UIColor+hex.swift */; };
 		3037CF8A2634289900ED7859 /* CafeSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3037CF892634289900ED7859 /* CafeSearchService.swift */; };
 		3037CF8F263428E700ED7859 /* CafeSearchResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3037CF8E263428E700ED7859 /* CafeSearchResultModel.swift */; };
 		304FB3AD2632B61900C2B364 /* SearchListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304FB3AC2632B61900C2B364 /* SearchListViewModel.swift */; };
@@ -57,6 +59,8 @@
 		0C6750380326895E2AAA6969 /* Pods_Homework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Homework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B02EA3EE8972B9CB23069D8 /* Pods_HomeworkTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HomeworkTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2120499BA7D5B8F344C325F8 /* Pods-Homework.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Homework.debug.xcconfig"; path = "Target Support Files/Pods-Homework/Pods-Homework.debug.xcconfig"; sourceTree = "<group>"; };
+		302C1E5726343B8E0064E4B4 /* String+htmlEscaped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+htmlEscaped.swift"; sourceTree = "<group>"; };
+		302C1E5F26343D850064E4B4 /* UIColor+hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+hex.swift"; sourceTree = "<group>"; };
 		3037CF892634289900ED7859 /* CafeSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeSearchService.swift; sourceTree = "<group>"; };
 		3037CF8E263428E700ED7859 /* CafeSearchResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeSearchResultModel.swift; sourceTree = "<group>"; };
 		304FB3AC2632B61900C2B364 /* SearchListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListViewModel.swift; sourceTree = "<group>"; };
@@ -123,6 +127,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		302C1E5626343B770064E4B4 /* UIExtension */ = {
+			isa = PBXGroup;
+			children = (
+				302C1E5726343B8E0064E4B4 /* String+htmlEscaped.swift */,
+				302C1E5F26343D850064E4B4 /* UIColor+hex.swift */,
+			);
+			path = UIExtension;
+			sourceTree = "<group>";
+		};
 		304FB3A32632B5AE00C2B364 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -157,6 +170,7 @@
 		304FB3B42632B63700C2B364 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				302C1E5626343B770064E4B4 /* UIExtension */,
 				304FB3F82633095900C2B364 /* Enum */,
 				308C7B6E2633A9E800CB4605 /* Constants.swift */,
 			);
@@ -510,6 +524,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				302C1E6026343D850064E4B4 /* UIColor+hex.swift in Sources */,
 				308C7B4E2633A89F00CB4605 /* ServiceAPI.swift in Sources */,
 				308C7B34263318CB00CB4605 /* WebPageViewController.swift in Sources */,
 				308C7B7726340FB200CB4605 /* ListCellViewModel.swift in Sources */,
@@ -517,6 +532,7 @@
 				308C7B6F2633A9E800CB4605 /* Constants.swift in Sources */,
 				304FB3F42633092200C2B364 /* FilterEnum.swift in Sources */,
 				30ACB27B2632ABD7003F1B60 /* SearchListViewController.swift in Sources */,
+				302C1E5826343B8E0064E4B4 /* String+htmlEscaped.swift in Sources */,
 				308C7B6A2633A9CA00CB4605 /* MetaModel.swift in Sources */,
 				3037CF8A2634289900ED7859 /* CafeSearchService.swift in Sources */,
 				304FB3EF263308FA00C2B364 /* SortEnum.swift in Sources */,

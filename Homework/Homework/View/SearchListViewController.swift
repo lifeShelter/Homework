@@ -105,7 +105,9 @@ class SearchListViewController: UIViewController {
     private func setCellContents(_ cell:ListTableViewCell, item:ListCellViewModel) {
         cell.typeLabel.text = item.label
         cell.nameLabel.text = item.name
-        cell.titleLabel.text = item.title
+        let font = cell.titleLabel.font
+        let color = cell.titleLabel.textColor.hexDescription()
+        cell.titleLabel.attributedText = item.title.htmlEscaped(font: font ?? UIFont.systemFont(ofSize: 15), colorHex: color, lineSpacing: 1.0)
         cell.dateTimeLabel.text = item.dateString
     }
 }
