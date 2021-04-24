@@ -90,8 +90,11 @@ class SearchListViewModel {
             }).disposed(by: disposeBag)
         Observable.combineLatest(blogResult.map(makeListCellViewModel(_:)), cafeResult.map(makeListCellViewModel(_:))) {
             $0 + $1
-        }
-            .bind(to: searchResultList).disposed(by: disposeBag)
+        }.map {
+            $0.sorted { left, right -> Bool in
+                left.title < right.title
+            }
+        }.bind(to: searchResultList).disposed(by: disposeBag)
     }
     
     
