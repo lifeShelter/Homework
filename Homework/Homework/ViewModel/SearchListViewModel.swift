@@ -13,6 +13,9 @@ import RxCocoa
 class SearchListViewModel {
     // private
     private var disposeBag = DisposeBag()
+    private let searchStart = PublishRelay<String>()
+    private let filterAndSortChanged = BehaviorRelay<(FilterEnum,SortEnum)>(value: (.all, .title))
+    private let searchCase = PublishRelay<(String,(FilterEnum,SortEnum))>()
     
     // input
     let searchBarText = PublishRelay<String>()
@@ -30,18 +33,16 @@ class SearchListViewModel {
         tapSearchButton.withLatestFrom(searchBarText)
             .map { $0.trimmingCharacters(in: .whitespacesAndNewlines)}
             .filter { $0 != ""}
-            .subscribe(onNext:{[weak self] str in
-                print("sub")
-                print(str)
-                self?.addHistory(str)
-            }).disposed(by: disposeBag)
+            .bind(to: searchStart).disposed(by: disposeBag)
+        searchStart.map(addHistory(_:)).subscribe().disposed(by: disposeBag)
         historyRelay.accept(getHistory())
         searchBarBeginEdit.bind(to: showHistory).disposed(by: disposeBag)
-        filterType.subscribe(onNext:{ filter in
-            print(filter)
-        }).disposed(by: disposeBag)
-        sortType.subscribe(onNext:{ sort in
-            print(sort)
+        Observable.combineLatest(filterType, sortType)
+            .bind(to: filterAndSortChanged).disposed(by: disposeBag)
+        Observable.combineLatest(searchStart, filterAndSortChanged)
+            .bind(to: searchCase).disposed(by: disposeBag)
+        searchCase.subscribe(onNext:{
+            print("\($0),\($1)")
         }).disposed(by: disposeBag)
     }
     
