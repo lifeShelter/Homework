@@ -67,8 +67,6 @@ class SearchListViewModel {
                 break
                 }
             }).disposed(by: disposeBag)
-//        blogResult.map(makeListCellViewModel(_:))
-//            .bind(to: searchResultList).disposed(by: disposeBag)
         searchCase.map(makeRequestModel(_:))
             .flatMap(CafeSearchService.cafeSearch(_:))
             .subscribe(onNext:{ [weak self]  in
@@ -90,7 +88,9 @@ class SearchListViewModel {
                 break
                 }
             }).disposed(by: disposeBag)
-        cafeResult.map(makeListCellViewModel(_:))
+        Observable.combineLatest(blogResult.map(makeListCellViewModel(_:)), cafeResult.map(makeListCellViewModel(_:))) {
+            $0 + $1
+        }
             .bind(to: searchResultList).disposed(by: disposeBag)
     }
     
