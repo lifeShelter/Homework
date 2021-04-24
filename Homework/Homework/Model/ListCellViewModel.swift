@@ -15,6 +15,7 @@ struct ListCellViewModel {
     let title:String
     let dateString:String
     
+    
     init(_ resultModel:BlogSearchResultModel) {
         self.thunmbnail = resultModel.thumbnail
         self.label = "B"

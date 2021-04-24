@@ -79,8 +79,8 @@ class SearchListViewController: UIViewController {
         }).disposed(by: disposeBag)
         viewModel.searchResultList
             .observe(on: MainScheduler.instance)
-            .bind(to: tableView.rx.items(cellIdentifier: "listCell",cellType: ListTableViewCell.self))  { [weak self]  index, item, cell in
-                self?.setCellContents(cell, item: item)
+            .bind(to: tableView.rx.items(cellIdentifier: "listCell",cellType: ListTableViewCell.self))  { index, item, cell in
+                cell.setDatas(item)
             }.disposed(by: disposeBag)
         
     }
@@ -99,16 +99,6 @@ class SearchListViewController: UIViewController {
         actionSheet.addAction(titleAction)
         actionSheet.addAction(dateTimeAction)
         present(actionSheet, animated: true, completion: nil)
-    }
-    
-    
-    private func setCellContents(_ cell:ListTableViewCell, item:ListCellViewModel) {
-        cell.typeLabel.text = item.label
-        cell.nameLabel.text = item.name
-        let font = cell.titleLabel.font
-        let color = cell.titleLabel.textColor.hexDescription()
-        cell.titleLabel.attributedText = item.title.htmlEscaped(font: font ?? UIFont.systemFont(ofSize: 15), colorHex: color, lineSpacing: 1.0)
-        cell.dateTimeLabel.text = item.dateString
     }
 }
 

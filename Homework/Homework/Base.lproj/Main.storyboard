@@ -158,6 +158,7 @@
                                         <connections>
                                             <outlet property="dateTimeLabel" destination="HJu-J0-VaV" id="7xu-oF-0Uf"/>
                                             <outlet property="nameLabel" destination="YfS-Cu-vaY" id="mut-gY-k9d"/>
+                                            <outlet property="thumnailView" destination="05T-P8-Os5" id="YC5-dZ-AY3"/>
                                             <outlet property="titleLabel" destination="z8Q-ra-NKD" id="z7C-Km-mNS"/>
                                             <outlet property="typeLabel" destination="2Kd-EK-qgv" id="9Dh-c5-FEf"/>
                                         </connections>
