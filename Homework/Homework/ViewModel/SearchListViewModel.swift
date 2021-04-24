@@ -18,6 +18,7 @@ class SearchListViewModel {
     private let searchCase = PublishRelay<(String,(FilterEnum,SortEnum))>()
     private let requestModel = PublishRelay<SearchRequestModel>()
     private let blogResult = PublishRelay<[BlogSearchResultModel]>()
+    private let cafeResult = PublishRelay<[CafeSearchResultModel]>()
     
     // input
     let searchBarText = PublishRelay<String>()
@@ -66,7 +67,30 @@ class SearchListViewModel {
                 break
                 }
             }).disposed(by: disposeBag)
-        blogResult.map(makeListCellViewModel(_:))
+//        blogResult.map(makeListCellViewModel(_:))
+//            .bind(to: searchResultList).disposed(by: disposeBag)
+        searchCase.map(makeRequestModel(_:))
+            .flatMap(CafeSearchService.cafeSearch(_:))
+            .subscribe(onNext:{ [weak self]  in
+                switch $0 {
+                case .failure(.invalidJson):
+                    break
+                case .failure(.networkError):
+                    break
+                case .failure(.notAuthorized):
+                    break
+                case .failure(.emptyResult):
+                    //                    self.showVerifyPhoneNumberPage.accept($0.1)
+                    break
+                case .success(_):
+                _ = $0.map {
+                    print($0)
+                    self?.cafeResult.accept($0)
+                }
+                break
+                }
+            }).disposed(by: disposeBag)
+        cafeResult.map(makeListCellViewModel(_:))
             .bind(to: searchResultList).disposed(by: disposeBag)
     }
     
@@ -107,6 +131,16 @@ class SearchListViewModel {
             return  []
         }
         return blogResult.map {
+            ListCellViewModel($0)
+        }
+    }
+    
+    
+    private func makeListCellViewModel(_ cafeResult:[CafeSearchResultModel]) -> [ListCellViewModel] {
+        if cafeResult.count == 0 {
+            return  []
+        }
+        return cafeResult.map {
             ListCellViewModel($0)
         }
     }

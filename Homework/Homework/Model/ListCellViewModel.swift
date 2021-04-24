@@ -27,4 +27,17 @@ struct ListCellViewModel {
         self.dateString = Constants.dateToYYYYMMDDString(date)
 //        print(dateString)
     }
+    
+    
+    init(_ resultModel:CafeSearchResultModel) {
+        self.thunmbnail = resultModel.thumbnail
+        self.label = "C"
+        self.name = resultModel.cafeName
+        self.title = resultModel.title
+        guard let date = Constants.ISO8601StringToDate(resultModel.dateTime) else  {
+            self.dateString = ""
+            return
+        }
+        self.dateString = Constants.dateToYYYYMMDDString(date)
+    }
 }
