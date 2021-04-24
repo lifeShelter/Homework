@@ -26,11 +26,13 @@ class SearchListViewModel {
     let searchBarBeginEdit = PublishRelay<Void>()
     let filterType = BehaviorRelay<FilterEnum>(value:.all)
     let sortType = BehaviorRelay<SortEnum>(value:.title)
+    let cellSelected = PublishRelay<IndexPath>()
     
     // output
     let historyRelay = BehaviorRelay<[String]>(value: [])
     let showHistory = PublishRelay<Void>()
     let searchResultList = BehaviorRelay<[ListCellViewModel]>(value: [])
+    let showDetail = PublishRelay<ListCellViewModel>()
     
     
     init() {
@@ -57,7 +59,6 @@ class SearchListViewModel {
                 case .failure(.notAuthorized):
                     break
                 case .failure(.emptyResult):
-                    //                    self.showVerifyPhoneNumberPage.accept($0.1)
                     break
                 case .success(_):
                 _ = $0.map {
@@ -78,7 +79,6 @@ class SearchListViewModel {
                 case .failure(.notAuthorized):
                     break
                 case .failure(.emptyResult):
-                    //                    self.showVerifyPhoneNumberPage.accept($0.1)
                     break
                 case .success(_):
                 _ = $0.map {
@@ -95,6 +95,9 @@ class SearchListViewModel {
                 left.title < right.title
             }
         }.bind(to: searchResultList).disposed(by: disposeBag)
+        cellSelected.withLatestFrom(searchResultList) {
+            $1[$0.row]
+        }.bind(to: showDetail).disposed(by: disposeBag)
     }
     
     

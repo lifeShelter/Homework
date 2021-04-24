@@ -27,17 +27,26 @@ class SearchListViewController: UIViewController {
         inputBinding()
         outputBinding()
     }
-
+    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
     
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showDetail" {
+            if let destNaviContrl = segue.destination as? UINavigationController, let dest = destNaviContrl.topViewController as? DetailViewController {
+                dest.listCellViewModel = sender as? ListCellViewModel
+            }
+        }
+    }
+    
+    
     private func setupDefaults() {
         setupFilterDropDown()
         setupHistoryDropDown()
-        
+        tableView.rx.setDelegate(self).disposed(by: disposeBag)
     }
     
     
@@ -66,7 +75,7 @@ class SearchListViewController: UIViewController {
         searchBar.rx.searchButtonClicked.bind(to: viewModel.tapSearchButton).disposed(by: disposeBag)
         searchButton.rx.tap.bind(to: viewModel.tapSearchButton).disposed(by: disposeBag)
         searchBar.rx.textDidBeginEditing.bind(to: viewModel.searchBarBeginEdit).disposed(by: disposeBag)
-        tableView.rx.setDelegate(self).disposed(by: disposeBag)
+        tableView.rx.itemSelected.bind(to: viewModel.cellSelected).disposed(by:disposeBag)
     }
     
     
@@ -82,7 +91,9 @@ class SearchListViewController: UIViewController {
             .bind(to: tableView.rx.items(cellIdentifier: "listCell",cellType: ListTableViewCell.self))  { index, item, cell in
                 cell.setDatas(item)
             }.disposed(by: disposeBag)
-        
+        viewModel.showDetail.subscribe(onNext:{[weak self] in
+            self?.performSegue(withIdentifier: "showDetail", sender: $0)
+        }).disposed(by: disposeBag)
     }
     
     
@@ -124,20 +135,20 @@ extension SearchListViewController:UITableViewDelegate {
         cell.textField.text = filterDropDown.selectedItem ?? "All"
         return cell
     }
-
-
+    
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
     }
-
-
+    
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120
     }
-
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: "showDetail", sender: nil)
-    }
+    
+    
+    //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    //        self.performSegue(withIdentifier: "showDetail", sender: nil)
+    //    }
 }
 
