@@ -37,8 +37,7 @@ class SearchListViewController: UIViewController {
     private func setupDefaults() {
         setupFilterDropDown()
         setupHistoryDropDown()
-        tableView.delegate = self
-        tableView.dataSource = self
+        
     }
     
     
@@ -67,6 +66,7 @@ class SearchListViewController: UIViewController {
         searchBar.rx.searchButtonClicked.bind(to: viewModel.tapSearchButton).disposed(by: disposeBag)
         searchButton.rx.tap.bind(to: viewModel.tapSearchButton).disposed(by: disposeBag)
         searchBar.rx.textDidBeginEditing.bind(to: viewModel.searchBarBeginEdit).disposed(by: disposeBag)
+        tableView.rx.setDelegate(self).disposed(by: disposeBag)
     }
     
     
@@ -77,6 +77,12 @@ class SearchListViewController: UIViewController {
         viewModel.showHistory.subscribe(onNext:{[weak self] _ in
             self?.historyDropDown.show()
         }).disposed(by: disposeBag)
+        viewModel.searchResultList
+            .observe(on: MainScheduler.instance)
+            .bind(to: tableView.rx.items(cellIdentifier: "listCell",cellType: ListTableViewCell.self))  { [weak self]  index, item, cell in
+                self?.setCellContents(cell, item: item)
+            }.disposed(by: disposeBag)
+        
     }
     
     
@@ -94,33 +100,20 @@ class SearchListViewController: UIViewController {
         actionSheet.addAction(dateTimeAction)
         present(actionSheet, animated: true, completion: nil)
     }
-}
-
-
-extension SearchListViewController:UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 100
+    
+    
+    private func setCellContents(_ cell:ListTableViewCell, item:ListCellViewModel) {
+        cell.typeLabel.text = item.label
+        cell.nameLabel.text = item.name
+        cell.titleLabel.text = item.title
+        cell.dateTimeLabel.text = item.dateString
     }
-    
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "listCell") as? ListTableViewCell else  {
-            print("listcell load fail")
-            return UITableViewCell()
-        }
-        return cell
-    }
-    
 }
 
 
 extension SearchListViewController:UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
+
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FilterCell") as? FilterTableViewCell else {
             print("filtercell load fail")
             return UIView()
@@ -139,18 +132,18 @@ extension SearchListViewController:UITableViewDelegate {
         cell.textField.text = filterDropDown.selectedItem ?? "All"
         return cell
     }
-    
-    
+
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
     }
-    
-    
+
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120
     }
-    
-    
+
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.performSegue(withIdentifier: "showDetail", sender: nil)
     }

@@ -25,6 +25,6 @@ struct ListCellViewModel {
             return
         }
         self.dateString = Constants.dateToYYYYMMDDString(date)
-        print(dateString)
+//        print(dateString)
     }
 }

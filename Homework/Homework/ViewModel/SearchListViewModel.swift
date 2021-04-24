@@ -66,10 +66,6 @@ class SearchListViewModel {
                 break
                 }
             }).disposed(by: disposeBag)
-        
-        blogResult.subscribe(onNext:{ array in
-            print("blogresult = \(array)")
-        }).disposed(by: disposeBag)
         blogResult.map(makeListCellViewModel(_:))
             .bind(to: searchResultList).disposed(by: disposeBag)
     }
