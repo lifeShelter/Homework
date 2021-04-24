@@ -27,4 +27,12 @@ struct SearchRequestModel {
         }
         return dic
     }
+    
+    
+    init(_ query:String, sort:SortEnum) {
+        self.query = query
+        self.sort = (sort == .title) ? "accuracy" : "recency"
+        page = 1
+        size = 25
+    }
 }

@@ -16,6 +16,8 @@ class SearchListViewModel {
     private let searchStart = PublishRelay<String>()
     private let filterAndSortChanged = BehaviorRelay<(FilterEnum,SortEnum)>(value: (.all, .title))
     private let searchCase = PublishRelay<(String,(FilterEnum,SortEnum))>()
+    private let requestModel = PublishRelay<SearchRequestModel>()
+    private let blogResult = PublishRelay<[BlogSearchResultModel]>()
     
     // input
     let searchBarText = PublishRelay<String>()
@@ -25,8 +27,9 @@ class SearchListViewModel {
     let sortType = BehaviorRelay<SortEnum>(value:.title)
     
     // output
-    let historyRelay = BehaviorRelay<Array<String>>(value: [])
+    let historyRelay = BehaviorRelay<[String]>(value: [])
     let showHistory = PublishRelay<Void>()
+    let searchResultList = BehaviorRelay<[ListCellViewModel]>(value: [])
     
     
     init() {
@@ -41,9 +44,34 @@ class SearchListViewModel {
             .bind(to: filterAndSortChanged).disposed(by: disposeBag)
         Observable.combineLatest(searchStart, filterAndSortChanged)
             .bind(to: searchCase).disposed(by: disposeBag)
-        searchCase.subscribe(onNext:{
-            print("\($0),\($1)")
+        
+        searchCase.map(makeRequestModel(_:))
+            .flatMap(BlogSearchService.blogSearch(_:))
+            .subscribe(onNext:{ [weak self]  in
+                switch $0 {
+                case .failure(.invalidJson):
+                    break
+                case .failure(.networkError):
+                    break
+                case .failure(.notAuthorized):
+                    break
+                case .failure(.emptyResult):
+                    //                    self.showVerifyPhoneNumberPage.accept($0.1)
+                    break
+                case .success(_):
+                _ = $0.map {
+                    print($0)
+                    self?.blogResult.accept($0)
+                }
+                break
+                }
+            }).disposed(by: disposeBag)
+        
+        blogResult.subscribe(onNext:{ array in
+            print("blogresult = \(array)")
         }).disposed(by: disposeBag)
+        blogResult.map(makeListCellViewModel(_:))
+            .bind(to: searchResultList).disposed(by: disposeBag)
     }
     
     
@@ -54,10 +82,10 @@ class SearchListViewModel {
             UserDefaults.standard.synchronize()
             return
         }
-
+        
         var historySet:Set<String> = Set(history.map {$0})
         historySet.insert(str)
-//        print("historySet = \(historySet)")
+        //        print("historySet = \(historySet)")
         UserDefaults.standard.setValue(Array(historySet), forKey: "history")
         UserDefaults.standard.synchronize()
         historyRelay.accept(Array(historySet))
@@ -69,6 +97,21 @@ class SearchListViewModel {
             return history
         } else {
             return []
+        }
+    }
+    
+    
+    private func makeRequestModel(_ searchCase:(String,(FilterEnum,SortEnum))) -> SearchRequestModel {
+        return SearchRequestModel(searchCase.0, sort: searchCase.1.1)
+    }
+    
+    
+    private func makeListCellViewModel(_ blogResult:[BlogSearchResultModel]) -> [ListCellViewModel] {
+        if blogResult.count == 0 {
+            return  []
+        }
+        return blogResult.map {
+            ListCellViewModel($0)
         }
     }
 }
