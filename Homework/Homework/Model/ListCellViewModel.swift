@@ -24,8 +24,16 @@ struct ListCellViewModel {
             self.dateString = ""
             return
         }
-        self.dateString = Constants.dateToYYYYMMDDString(date)
-//        print(dateString)
+        var dateString = ""
+        if Constants.isToday(date) {
+            dateString = "오늘"
+        } else if Constants.isYesterday(date) {
+            dateString = "어제"
+        } else {
+            dateString = Constants.dateToYYYYMMDDString(date)
+        }
+//        print("\(Constants.dateToYYYYMMDDString(date)),\(dateString)")
+        self.dateString = dateString
     }
     
     
