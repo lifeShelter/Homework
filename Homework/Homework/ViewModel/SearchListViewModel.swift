@@ -103,7 +103,29 @@ class SearchListViewModel {
             $0 + $1
         }.bind(to: combineResult).disposed(by: disposeBag)
         
-        Observable.combineLatest(combineResult.filter{$0.count > 0}, filterAndSortChanged) { array, filterAndSort -> [ListCellViewModel] in
+        combineResult.filter{$0.count > 0}
+            .withLatestFrom(filterAndSortChanged) { array, filterAndSort -> [ListCellViewModel] in
+                let filterArray = array.filter {
+                    if filterAndSort.0 == .cafe {
+                        return $0.label == "C"
+                    } else if filterAndSort.0 == .blog {
+                        return $0.label == "B"
+                    }
+                    return true
+                }
+                return  filterArray.sorted { left, right -> Bool in
+                    if filterAndSort.1 == .title {
+                        return left.title < right.title
+                    } else {
+                        return left.dateString < right.dateString
+                    }
+                }
+            }.withLatestFrom(searchResultList) { [weak self] in
+                self?.nowLoading.accept(false)
+                return $1 + $0
+            }.bind(to: searchResultList).disposed(by: disposeBag)
+        
+        filterAndSortChanged.withLatestFrom(combineResult) { filterAndSort, array -> [ListCellViewModel] in
             let filterArray = array.filter {
                 if filterAndSort.0 == .cafe {
                     return $0.label == "C"
@@ -119,9 +141,6 @@ class SearchListViewModel {
                     return left.dateString < right.dateString
                 }
             }
-        }.withLatestFrom(searchResultList) { [weak self] in
-            self?.nowLoading.accept(false)
-            return $1 + $0
         }.bind(to: searchResultList).disposed(by: disposeBag)
         
         cellSelected.withLatestFrom(searchResultList) {
