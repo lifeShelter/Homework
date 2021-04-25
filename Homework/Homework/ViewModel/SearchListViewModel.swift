@@ -118,10 +118,7 @@ class SearchListViewModel {
             .withLatestFrom(filterAndSortChanged,resultSelector: filterAndSortArray)
             .withLatestFrom(searchResultList) { [weak self] in
                 self?.nowLoading.accept(false)
-                let array = $1 + $0
-                let resultSet:Set<ListCellViewModel> = Set(array.map { $0 })
-//                print("resultSet=\(resultSet)")
-                return Array(resultSet)
+                return $1 + $0
             }.bind(to: searchResultList).disposed(by: disposeBag)
         
         filterAndSortChanged.withLatestFrom(pageResults,resultSelector: filterAndSortArray)
@@ -208,16 +205,23 @@ class SearchListViewModel {
                 }
                 return true
             }
-            return  filterArray.sorted { left, right -> Bool in
+            let returnArray =   filterArray.sorted { left, right -> Bool in
                 if filterAndSort.1 == .title {
                     return left.title < right.title
                 } else {
                     return left.dateString < right.dateString
                 }
             }
+        return deleteDuplicate(returnArray)
     }
     
     private func filterAndSortArray(_ filterAndSort:(FilterEnum,SortEnum),_ array:[ListCellViewModel]) -> [ListCellViewModel] {
         filterAndSortArray(array,filterAndSort)
+    }
+    
+    
+    private func deleteDuplicate(_ array:[ListCellViewModel]) ->[ListCellViewModel] {
+        let resultSet:Set<ListCellViewModel> = Set(array.map { $0 })
+        return Array(resultSet)
     }
 }
