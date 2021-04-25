@@ -38,12 +38,6 @@ class DetailViewController: UIViewController {
     }
     
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        disposeBag = DisposeBag()
-    }
-    
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showWebPage" {
             if let dest = segue.destination as? WebPageViewController {

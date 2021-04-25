@@ -11,6 +11,8 @@
 		302C1E6026343D850064E4B4 /* UIColor+hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302C1E5F26343D850064E4B4 /* UIColor+hex.swift */; };
 		302C1E6526345CFD0064E4B4 /* LoadImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302C1E6426345CFD0064E4B4 /* LoadImageService.swift */; };
 		302D25442635930B006465A0 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302D25432635930B006465A0 /* DetailViewModel.swift */; };
+		302D254C2635ACED006465A0 /* WebPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302D254B2635ACED006465A0 /* WebPageViewModel.swift */; };
+		302D25512635ADD2006465A0 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 302D25502635ADD2006465A0 /* WebKit.framework */; };
 		3037CF8A2634289900ED7859 /* CafeSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3037CF892634289900ED7859 /* CafeSearchService.swift */; };
 		3037CF8F263428E700ED7859 /* CafeSearchResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3037CF8E263428E700ED7859 /* CafeSearchResultModel.swift */; };
 		304FB3AD2632B61900C2B364 /* SearchListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304FB3AC2632B61900C2B364 /* SearchListViewModel.swift */; };
@@ -65,6 +67,8 @@
 		302C1E5F26343D850064E4B4 /* UIColor+hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+hex.swift"; sourceTree = "<group>"; };
 		302C1E6426345CFD0064E4B4 /* LoadImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImageService.swift; sourceTree = "<group>"; };
 		302D25432635930B006465A0 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		302D254B2635ACED006465A0 /* WebPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPageViewModel.swift; sourceTree = "<group>"; };
+		302D25502635ADD2006465A0 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		3037CF892634289900ED7859 /* CafeSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeSearchService.swift; sourceTree = "<group>"; };
 		3037CF8E263428E700ED7859 /* CafeSearchResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeSearchResultModel.swift; sourceTree = "<group>"; };
 		304FB3AC2632B61900C2B364 /* SearchListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListViewModel.swift; sourceTree = "<group>"; };
@@ -108,6 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				302D25512635ADD2006465A0 /* WebKit.framework in Frameworks */,
 				78969C147CC2DD3A8A2B920E /* Pods_Homework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -156,6 +161,7 @@
 			children = (
 				304FB3AC2632B61900C2B364 /* SearchListViewModel.swift */,
 				302D25432635930B006465A0 /* DetailViewModel.swift */,
+				302D254B2635ACED006465A0 /* WebPageViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -272,6 +278,7 @@
 		59C611E7C185F2D529BD9778 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				302D25502635ADD2006465A0 /* WebKit.framework */,
 				0C6750380326895E2AAA6969 /* Pods_Homework.framework */,
 				347E3E0315CE0CE04812CFB1 /* Pods_Homework_HomeworkUITests.framework */,
 				1B02EA3EE8972B9CB23069D8 /* Pods_HomeworkTests.framework */,
@@ -546,6 +553,7 @@
 				304FB3E72632FC1C00C2B364 /* FilterTableViewCell.swift in Sources */,
 				308C7B532633A8B200CB4605 /* ServiceError.swift in Sources */,
 				3037CF8F263428E700ED7859 /* CafeSearchResultModel.swift in Sources */,
+				302D254C2635ACED006465A0 /* WebPageViewModel.swift in Sources */,
 				302C1E6526345CFD0064E4B4 /* LoadImageService.swift in Sources */,
 				30ACB2772632ABD7003F1B60 /* AppDelegate.swift in Sources */,
 				308C7B582633A8CF00CB4605 /* BlogSearchService.swift in Sources */,

@@ -345,6 +345,7 @@
                         <barButtonItem key="backBarButtonItem" title="back" id="bnk-36-9TB"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="titleView" destination="5Yc-8R-EM0" id="443-dD-2ti"/>
                         <outlet property="webView" destination="W25-DS-BOF" id="UuH-bf-gNP"/>
                     </connections>
                 </viewController>
