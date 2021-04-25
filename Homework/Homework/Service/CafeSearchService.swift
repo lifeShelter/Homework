@@ -16,10 +16,10 @@ class CafeSearchService {
     static func cafeSearch(_ requestModel:SearchRequestModel) -> Observable<Result<[CafeSearchResultModel],ServiceError>> {
         let headers: HTTPHeaders = ["Authorization": "KakaoAK "+Constants.daumRestAPIKey]
         return RxAlamofire.request(.get, ServiceAPI.cafe.urlString, parameters: requestModel.parameters, headers: headers).responseData()
-            .debug()
+//            .debug()
             .map { response, data -> Result<[CafeSearchResultModel],ServiceError> in
-                let dic = JSON(json)
-                print(dic)
+//                let dic = JSON(json)
+//                print(dic)
                 guard 200..<300 ~= response.statusCode else {
                     return .failure(ServiceError.notAuthorized)
                 }

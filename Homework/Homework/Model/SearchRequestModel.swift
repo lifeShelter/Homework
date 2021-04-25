@@ -29,9 +29,9 @@ struct SearchRequestModel {
     }
     
     
-    init(_ query:String, sort:SortEnum) {
+    init(_ query:String) {
         self.query = query
-        self.sort = (sort == .title) ? "accuracy" : "recency"
+        self.sort = "accuracy"
         page = 1
         size = 25
     }

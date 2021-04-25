@@ -8,10 +8,11 @@
 import UIKit
 
 class DetailViewController: UIViewController {
+    var listCellViewModel:ListCellViewModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("listcell = \(String(describing: listCellViewModel))")
     }
     
 

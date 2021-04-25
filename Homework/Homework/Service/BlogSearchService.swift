@@ -16,10 +16,10 @@ class BlogSearchService {
     static func blogSearch(_ requestModel:SearchRequestModel) -> Observable<Result<[BlogSearchResultModel],ServiceError>> {
         let headers: HTTPHeaders = ["Authorization": "KakaoAK "+Constants.daumRestAPIKey]
         return RxAlamofire.request(.get, ServiceAPI.blog.urlString, parameters: requestModel.parameters, headers: headers).responseData()
-            .debug()
+//            .debug()
             .map { response, data -> Result<[BlogSearchResultModel],ServiceError> in
-                let dic = JSON(json)
-                print(dic)
+//                let dic = JSON(json)
+//                print(dic)
                 guard 200..<300 ~= response.statusCode else {
                     return .failure(ServiceError.notAuthorized)
                 }

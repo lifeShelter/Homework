@@ -25,4 +25,27 @@ class Constants {
         dateFormatter.locale = Locale(identifier: "ko")
         return dateFormatter.string(from: date)
     }
+    
+    
+    static func isToday(_ date:Date) -> Bool {
+        let calendar =  Calendar.current
+        return calendar.isDateInToday(date)
+    }
+    
+    
+    static func isYesterday(_ date:Date) -> Bool {
+        let calendar =  Calendar.current
+        return calendar.isDateInYesterday(date)
+    }
+    
+    
+    static func dateToDateString(_ date:Date) -> String {
+        if isToday(date) {
+           return "오늘"
+        } else if isYesterday(date) {
+            return "어제"
+        } else {
+            return dateToYYYYMMDDString(date)
+        }
+    }
 }
