@@ -40,7 +40,11 @@ class SearchListViewModel {
     
     
     init() {
-        
+        tapSearchButton.subscribe(onNext:{ [weak self]  in
+            self?.combineResult.accept([])
+            self?.searchResultList.accept([])
+            self?.pageResults.accept([])
+        }).disposed(by: disposeBag)
         tapSearchButton.withLatestFrom(searchBarText)
             .map { $0.trimmingCharacters(in: .whitespacesAndNewlines)}
             .filter { $0 != ""}
