@@ -12,6 +12,7 @@ import RxSwift
 class DetailViewController: UIViewController {
     // public
     var listCellViewModel:ListCellViewModel?
+    var closeAction:(ListCellViewModel)->Void = { _ in  }
     
     //private
     private var viewModel:DetailViewModel?
@@ -24,6 +25,8 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var contentsTextView: UITextView!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var urlLabel: UILabel!
+    @IBOutlet weak var backButton: UIBarButtonItem!
+    @IBOutlet weak var moveButton: UIButton!
     
     
     //MARK: - override
@@ -41,6 +44,15 @@ class DetailViewController: UIViewController {
     }
     
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showWebPage" {
+            if let dest = segue.destination as? WebPageViewController {
+                dest.listCellViewModel = sender as? ListCellViewModel
+            }
+        }
+    }
+    
+    
     //MARK: - setup
     private func setupDefaults() {
         guard let listCellViewModel = self.listCellViewModel else {
@@ -54,8 +66,14 @@ class DetailViewController: UIViewController {
     
     //MARK: - Binding
     private func inputBinding() {
-        viewModel?.titleLabelInfo.accept((titleLabel.font,titleLabel.textColor))
-        viewModel?.textViewInfo.accept((contentsTextView.font,contentsTextView.textColor))
+        guard let viewModel =  self.viewModel else {
+            print("viewModel이 초기화 되지 않았습니다.")
+            return
+        }
+        viewModel.titleLabelInfo.accept((titleLabel.font,titleLabel.textColor))
+        viewModel.textViewInfo.accept((contentsTextView.font,contentsTextView.textColor))
+        backButton.rx.tap.bind(to: viewModel.tapBackButton).disposed(by: disposeBag)
+        moveButton.rx.tap.bind(to: viewModel.tapMoveButton).disposed(by:disposeBag)
     }
     
     
@@ -73,11 +91,13 @@ class DetailViewController: UIViewController {
         viewModel.dateText.bind(to: dateLabel.rx.text).disposed(by: disposeBag)
         viewModel.urlText.bind(to:urlLabel.rx.text).disposed(by: disposeBag)
         viewModel.thumbnailImage.bind(to:imageView.rx.image).disposed(by: disposeBag)
-    }
-
-    
-    //MARK: - IBAction
-    @IBAction func backButtonAction(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        viewModel.closeDetail.subscribe(onNext:{[weak self] listViewModel in
+            self?.navigationController?.dismiss(animated: true, completion: {
+                self?.closeAction(listViewModel)
+            })
+        }).disposed(by: disposeBag)
+        viewModel.showWebPage.subscribe(onNext:{[weak self] listViewModel in
+            self?.performSegue(withIdentifier: "showWebPage", sender: listViewModel)
+        }).disposed(by: disposeBag)
     }
 }

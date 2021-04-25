@@ -258,9 +258,6 @@
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                                 <state key="normal" title="이동"/>
-                                                                <connections>
-                                                                    <segue destination="6te-zt-ECi" kind="show" id="YmB-jf-yiw"/>
-                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>
@@ -300,19 +297,18 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="ISO-5n-wqs">
-                        <barButtonItem key="leftBarButtonItem" title="Back" id="AEM-46-qYR">
-                            <connections>
-                                <action selector="backButtonAction:" destination="9lc-00-zxF" id="SFq-RV-ZiT"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="AEM-46-qYR"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="backButton" destination="AEM-46-qYR" id="pqb-a7-9Ib"/>
                         <outlet property="contentsTextView" destination="jIM-88-9ip" id="vOZ-Ii-chH"/>
                         <outlet property="dateLabel" destination="L66-h6-Jeg" id="gGb-Cl-skE"/>
                         <outlet property="imageView" destination="VOW-Up-YmX" id="bNm-T7-e5H"/>
+                        <outlet property="moveButton" destination="NqW-Q4-5NK" id="Iah-3G-8tB"/>
                         <outlet property="nameLabel" destination="vRw-vv-qIw" id="ESl-t8-5w5"/>
                         <outlet property="titleLabel" destination="PYL-bx-myu" id="tOj-XC-Gjc"/>
                         <outlet property="urlLabel" destination="tEd-c9-5hv" id="dqs-t8-ssD"/>
+                        <segue destination="6te-zt-ECi" kind="show" identifier="showWebPage" id="6lb-ln-7Rs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NZp-FE-0sf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
