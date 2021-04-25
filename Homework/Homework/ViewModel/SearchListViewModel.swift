@@ -15,10 +15,10 @@ class SearchListViewModel {
     private var disposeBag = DisposeBag()
     private let searchStart = PublishRelay<String>()
     private let filterAndSortChanged = BehaviorRelay<(FilterEnum,SortEnum)>(value: (.all, .title))
-    private let searchCase = PublishRelay<(String,(FilterEnum,SortEnum))>()
     private let requestModel = PublishRelay<SearchRequestModel>()
     private let blogResult = PublishRelay<[BlogSearchResultModel]>()
     private let cafeResult = PublishRelay<[CafeSearchResultModel]>()
+    private let combineResult = PublishRelay<[ListCellViewModel]>()
     
     // input
     let searchBarText = PublishRelay<String>()
@@ -36,19 +36,22 @@ class SearchListViewModel {
     
     
     init() {
+        
         tapSearchButton.withLatestFrom(searchBarText)
             .map { $0.trimmingCharacters(in: .whitespacesAndNewlines)}
             .filter { $0 != ""}
             .bind(to: searchStart).disposed(by: disposeBag)
+        
         searchStart.map(addHistory(_:)).subscribe().disposed(by: disposeBag)
+        
         historyRelay.accept(getHistory())
+        
         searchBarBeginEdit.bind(to: showHistory).disposed(by: disposeBag)
+        
         Observable.combineLatest(filterType, sortType)
             .bind(to: filterAndSortChanged).disposed(by: disposeBag)
-        Observable.combineLatest(searchStart, filterAndSortChanged)
-            .bind(to: searchCase).disposed(by: disposeBag)
         
-        searchCase.map(makeRequestModel(_:))
+        searchStart.map(makeRequestModel(_:))
             .flatMap(BlogSearchService.blogSearch(_:))
             .subscribe(onNext:{ [weak self]  in
                 switch $0 {
@@ -68,7 +71,8 @@ class SearchListViewModel {
                 break
                 }
             }).disposed(by: disposeBag)
-        searchCase.map(makeRequestModel(_:))
+        
+        searchStart.map(makeRequestModel(_:))
             .flatMap(CafeSearchService.cafeSearch(_:))
             .subscribe(onNext:{ [weak self]  in
                 switch $0 {
@@ -88,13 +92,23 @@ class SearchListViewModel {
                 break
                 }
             }).disposed(by: disposeBag)
+        
         Observable.combineLatest(blogResult.map(makeListCellViewModel(_:)), cafeResult.map(makeListCellViewModel(_:))) {
             $0 + $1
-        }.map {
-            $0.sorted { left, right -> Bool in
-                left.title < right.title
+        }.bind(to: combineResult).disposed(by: disposeBag)
+        
+        Observable.combineLatest(combineResult.filter{$0.count > 0}, filterAndSortChanged) {
+            if $1.1 == .title {
+                return  $0.sorted { left, right -> Bool in
+                    left.title < right.title
+                }
+            } else {
+                return $0.sorted { left, right -> Bool in
+                    left.dateString < right.dateString
+                }
             }
         }.bind(to: searchResultList).disposed(by: disposeBag)
+        
         cellSelected.withLatestFrom(searchResultList) {
             $1[$0.row]
         }.bind(to: showDetail).disposed(by: disposeBag)
@@ -127,8 +141,8 @@ class SearchListViewModel {
     }
     
     
-    private func makeRequestModel(_ searchCase:(String,(FilterEnum,SortEnum))) -> SearchRequestModel {
-        return SearchRequestModel(searchCase.0, sort: searchCase.1.1)
+    private func makeRequestModel(_ str:String) -> SearchRequestModel {
+        return SearchRequestModel(str)
     }
     
     
