@@ -12,11 +12,7 @@ import RxCocoa
 
 class WebPageViewModel {
     //private
-    private var listViewModel:ListCellViewModel
     private var disposeBag  = DisposeBag()
-    
-    // input
-    
     
     // output
     let naviTitleText = BehaviorRelay<String>(value: "")
@@ -24,8 +20,6 @@ class WebPageViewModel {
     
     
     init(_ listViewModel:ListCellViewModel) {
-        self.listViewModel = listViewModel
-        self.listViewModel.isOpenWebPage = true
         naviTitleText.accept((listViewModel.typeLabel == "B") ? "Blog" : "Cafe")
         if let url = URL(string:listViewModel.url) {
             let request = URLRequest(url: url)

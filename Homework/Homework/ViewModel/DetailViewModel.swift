@@ -67,4 +67,9 @@ class DetailViewModel {
         let titleColor =  info.1.hexDescription()
         return str.htmlEscaped(font: titleFont , colorHex: titleColor, lineSpacing: 1.0,  textAlignment: .center)
     }
+    
+    
+    func updateListCellViewModel(_ viewModel:ListCellViewModel) {
+        self.listViewModel =  viewModel
+    }
 }

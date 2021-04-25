@@ -13,6 +13,7 @@ import RxSwift
 class WebPageViewController: UIViewController {
     // public
     var listCellViewModel:ListCellViewModel?
+    var backAction:(ListCellViewModel)->Void = { _ in }
 
     // private
     private var viewModel:WebPageViewModel?
@@ -21,16 +22,22 @@ class WebPageViewController: UIViewController {
     // IBOutlet
     @IBOutlet weak var webView: WKWebView!
     @IBOutlet weak var titleView: UINavigationItem!
+    @IBOutlet weak var backButton: UIBarButtonItem!
     
     
     //MARK: -  override
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDefaults()
-        inputBinding()
         outputBinding()
-        
-        // Do any additional setup after loading the view.
+    }
+    
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if let listCellViewModel  = self.listCellViewModel {
+            backAction(listCellViewModel)
+        }
     }
     
     
@@ -41,15 +48,11 @@ class WebPageViewController: UIViewController {
             return
         }
         viewModel =  WebPageViewModel(listViewModel)
+        self.listCellViewModel?.isOpenWebPage = true
     }
     
     
     //MARK: - binding
-    private func inputBinding() {
-        
-    }
-    
-    
     private func outputBinding() {
         guard let viewModel = self.viewModel else {
             print("viewModel이 초기화 되지 않았습니다.")

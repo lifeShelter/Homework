@@ -42,6 +42,9 @@ class DetailViewController: UIViewController {
         if segue.identifier == "showWebPage" {
             if let dest = segue.destination as? WebPageViewController {
                 dest.listCellViewModel = sender as? ListCellViewModel
+                dest.backAction = { [weak self] in
+                    self?.viewModel?.updateListCellViewModel($0)
+                }
             }
         }
     }

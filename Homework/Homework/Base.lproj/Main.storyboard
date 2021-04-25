@@ -34,7 +34,7 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Mj2-ge-G8t">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" delaysContentTouches="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Mj2-ge-G8t">
                                 <rect key="frame" x="0.0" y="100" width="414" height="762"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
@@ -345,6 +345,7 @@
                         <barButtonItem key="backBarButtonItem" title="back" id="bnk-36-9TB"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="backButton" destination="bnk-36-9TB" id="oIJ-BX-GW0"/>
                         <outlet property="titleView" destination="5Yc-8R-EM0" id="443-dD-2ti"/>
                         <outlet property="webView" destination="W25-DS-BOF" id="UuH-bf-gNP"/>
                     </connections>

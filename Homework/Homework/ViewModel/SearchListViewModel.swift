@@ -236,7 +236,8 @@ class SearchListViewModel {
     
     //MARK: - filter and sort
     private func filterAndSortArray(_ array:[ListCellViewModel],_ filterAndSort:(FilterEnum,SortEnum)) -> [ListCellViewModel] {
-            let filterArray = array.filter {
+        let deletedArray = deleteDuplicate(array)
+        let filterArray = deletedArray.filter {
                 if filterAndSort.0 == .cafe {
                     return $0.typeLabel == "C"
                 } else if filterAndSort.0 == .blog {
@@ -251,7 +252,7 @@ class SearchListViewModel {
                     return left.dateString < right.dateString
                 }
             }
-        return deleteDuplicate(returnArray)
+        return returnArray
     }
     
     private func filterAndSortArray(_ filterAndSort:(FilterEnum,SortEnum),_ array:[ListCellViewModel]) -> [ListCellViewModel] {
@@ -262,5 +263,21 @@ class SearchListViewModel {
     private func deleteDuplicate(_ array:[ListCellViewModel]) ->[ListCellViewModel] {
         let resultSet:Set<ListCellViewModel> = Set(array.map { $0 })
         return Array(resultSet)
+    }
+    
+    
+    //MARK: - public
+    func updateCell(_ listModel:ListCellViewModel) {
+        print("updateCell")
+//        let updatedList = searchResultList.map { list in
+//            return list.map { viewModel -> ListCellViewModel in
+//                if viewModel == listModel {
+//                    return listModel
+//                } else {
+//                    return viewModel
+//                }
+//            }
+//        }
+        
     }
 }
