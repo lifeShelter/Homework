@@ -14,6 +14,7 @@ class DetailViewController: UIViewController {
     var listCellViewModel:ListCellViewModel?
     
     //private
+    private var viewModel:DetailViewModel?
     private var disposeBag = DisposeBag()
     
     // IBOutlet
@@ -25,9 +26,12 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var urlLabel: UILabel!
     
     
+    //MARK: - override
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDefaults()
+        inputBinding()
+        outputBinding()
     }
     
     
@@ -37,45 +41,42 @@ class DetailViewController: UIViewController {
     }
     
     
+    //MARK: - setup
     private func setupDefaults() {
         guard let listCellViewModel = self.listCellViewModel else {
             print("cell 정보가 전달되지 않았습니다.")
             return
         }
+        viewModel = DetailViewModel(listCellViewModel)
         print(listCellViewModel)
-        navigationController?.navigationBar.topItem?.title = (listCellViewModel.typeLabel == "B") ? "Blog" : "Cafe"
-        nameLabel.text =  listCellViewModel.name
-        
-        let titleFont  = titleLabel.font
-        let titleColor =  titleLabel.textColor.hexDescription()
-        titleLabel.attributedText = listCellViewModel.title.htmlEscaped(font: titleFont ?? UIFont.systemFont(ofSize: 17), colorHex: titleColor, lineSpacing: 1.0,  textAlignment: .center)
-        
-        let contentsFont = contentsTextView.font
-        var contentsColor:String
-        if let textViewTextColor = contentsTextView.textColor {
-            contentsColor = textViewTextColor.hexDescription()
-        } else {
-            if #available(iOS 13.0, *) {
-                contentsColor =  UIColor.label.hexDescription()
-            } else {
-                contentsColor = UIColor.black.hexDescription()
-            }
-        }
-        contentsTextView.attributedText =  listCellViewModel.contents.htmlEscaped(font: contentsFont ?? UIFont.systemFont(ofSize: 15), colorHex: contentsColor, lineSpacing: 1.0, textAlignment: .center)
-        dateLabel.text  = Constants.dateToDateString(listCellViewModel.date, dateFormat: "yyyy년 MM월 dd일 a hh시 mm분")
-        urlLabel.text = listCellViewModel.url
-        if listCellViewModel.thunmbnail != "" {
-            LoadImageService.loadImage(from: listCellViewModel.thunmbnail)
-                .observe(on: MainScheduler.instance)
-                .bind(to: imageView.rx.image)
-                .disposed(by: disposeBag)
-        } else {
-            imageView.image = nil
-        }
     }
     
+    
+    //MARK: - Binding
+    private func inputBinding() {
+        viewModel?.titleLabelInfo.accept((titleLabel.font,titleLabel.textColor))
+        viewModel?.textViewInfo.accept((contentsTextView.font,contentsTextView.textColor))
+    }
+    
+    
+    private func outputBinding() {
+        guard let viewModel =  self.viewModel else {
+            print("viewModel이 초기화 되지 않았습니다.")
+            return
+        }
+        if  let  navigationController = self.navigationController, let topItem  = navigationController.navigationBar.topItem {
+            viewModel.naviTitleText.bind(to: topItem.rx.title).disposed(by: disposeBag)
+        }
+        viewModel.nameText.bind(to: nameLabel.rx.text).disposed(by: disposeBag)
+        viewModel.titleText.bind(to: titleLabel.rx.attributedText).disposed(by: disposeBag)
+        viewModel.contentsText.bind(to: contentsTextView.rx.attributedText).disposed(by: disposeBag)
+        viewModel.dateText.bind(to: dateLabel.rx.text).disposed(by: disposeBag)
+        viewModel.urlText.bind(to:urlLabel.rx.text).disposed(by: disposeBag)
+        viewModel.thumbnailImage.bind(to:imageView.rx.image).disposed(by: disposeBag)
+    }
 
     
+    //MARK: - IBAction
     @IBAction func backButtonAction(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }

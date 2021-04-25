@@ -17,7 +17,7 @@ struct ListCellViewModel: Hashable {
     let url:String
     let contents:String
     let date:Date
-    
+    var isOpenWebPage:Bool = false
     
     init(_ resultModel:BlogSearchResultModel) {
         self.thunmbnail = resultModel.thumbnail
