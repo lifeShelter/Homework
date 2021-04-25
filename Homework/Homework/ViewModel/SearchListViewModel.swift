@@ -109,44 +109,14 @@ class SearchListViewModel {
         }.bind(to: pageResults).disposed(by: disposeBag)
         
         combineResult.filter{$0.count > 0}
-            .withLatestFrom(filterAndSortChanged) { array, filterAndSort -> [ListCellViewModel] in
-                let filterArray = array.filter {
-                    if filterAndSort.0 == .cafe {
-                        return $0.label == "C"
-                    } else if filterAndSort.0 == .blog {
-                        return $0.label == "B"
-                    }
-                    return true
-                }
-                return  filterArray.sorted { left, right -> Bool in
-                    if filterAndSort.1 == .title {
-                        return left.title < right.title
-                    } else {
-                        return left.dateString < right.dateString
-                    }
-                }
-            }.withLatestFrom(searchResultList) { [weak self] in
+            .withLatestFrom(filterAndSortChanged,resultSelector: filterAndSortArray)
+            .withLatestFrom(searchResultList) { [weak self] in
                 self?.nowLoading.accept(false)
                 return $1 + $0
             }.bind(to: searchResultList).disposed(by: disposeBag)
         
-        filterAndSortChanged.withLatestFrom(pageResults) { filterAndSort, array -> [ListCellViewModel] in
-            let filterArray = array.filter {
-                if filterAndSort.0 == .cafe {
-                    return $0.label == "C"
-                } else if filterAndSort.0 == .blog {
-                    return $0.label == "B"
-                }
-                return true
-            }
-            return  filterArray.sorted { left, right -> Bool in
-                if filterAndSort.1 == .title {
-                    return left.title < right.title
-                } else {
-                    return left.dateString < right.dateString
-                }
-            }
-        }.bind(to: searchResultList).disposed(by: disposeBag)
+        filterAndSortChanged.withLatestFrom(pageResults,resultSelector: filterAndSortArray)
+            .bind(to: searchResultList).disposed(by: disposeBag)
         
         cellSelected.withLatestFrom(searchResultList) {
             $1[$0.row]
@@ -162,7 +132,7 @@ class SearchListViewModel {
                 var requestModel =  $0
                 if let page =  requestModel.page {
                     requestModel.page = page + 1
-                    print("page = \(String(describing: requestModel.page))")
+//                    print("page = \(String(describing: requestModel.page))")
                 }
                 return requestModel
             }.bind(to: requestModel).disposed(by: disposeBag)
@@ -217,5 +187,28 @@ class SearchListViewModel {
         return cafeResult.map {
             ListCellViewModel($0)
         }
+    }
+    
+    
+    private func filterAndSortArray(_ array:[ListCellViewModel],_ filterAndSort:(FilterEnum,SortEnum)) -> [ListCellViewModel] {
+            let filterArray = array.filter {
+                if filterAndSort.0 == .cafe {
+                    return $0.label == "C"
+                } else if filterAndSort.0 == .blog {
+                    return $0.label == "B"
+                }
+                return true
+            }
+            return  filterArray.sorted { left, right -> Bool in
+                if filterAndSort.1 == .title {
+                    return left.title < right.title
+                } else {
+                    return left.dateString < right.dateString
+                }
+            }
+    }
+    
+    private func filterAndSortArray(_ filterAndSort:(FilterEnum,SortEnum),_ array:[ListCellViewModel]) -> [ListCellViewModel] {
+        filterAndSortArray(array,filterAndSort)
     }
 }
