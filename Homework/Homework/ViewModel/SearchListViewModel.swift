@@ -21,6 +21,7 @@ class SearchListViewModel {
     private let combineResult = PublishRelay<[ListCellViewModel]>()
     private let nowLoading = BehaviorRelay<Bool>(value: false)
     private let updateRequestModel = PublishRelay<SearchRequestModel>()
+    private let pageResults = BehaviorRelay<[ListCellViewModel]>(value: [])
     
     // input
     let searchBarText = PublishRelay<String>()
@@ -103,6 +104,10 @@ class SearchListViewModel {
             $0 + $1
         }.bind(to: combineResult).disposed(by: disposeBag)
         
+        combineResult.withLatestFrom(pageResults) {
+            $1 + $0
+        }.bind(to: pageResults).disposed(by: disposeBag)
+        
         combineResult.filter{$0.count > 0}
             .withLatestFrom(filterAndSortChanged) { array, filterAndSort -> [ListCellViewModel] in
                 let filterArray = array.filter {
@@ -125,7 +130,7 @@ class SearchListViewModel {
                 return $1 + $0
             }.bind(to: searchResultList).disposed(by: disposeBag)
         
-        filterAndSortChanged.withLatestFrom(combineResult) { filterAndSort, array -> [ListCellViewModel] in
+        filterAndSortChanged.withLatestFrom(pageResults) { filterAndSort, array -> [ListCellViewModel] in
             let filterArray = array.filter {
                 if filterAndSort.0 == .cafe {
                     return $0.label == "C"
