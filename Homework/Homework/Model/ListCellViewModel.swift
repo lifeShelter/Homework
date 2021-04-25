@@ -14,6 +14,7 @@ struct ListCellViewModel {
     let name:String
     let title:String
     let dateString:String
+    let url:String
     
     
     init(_ resultModel:BlogSearchResultModel) {
@@ -21,6 +22,7 @@ struct ListCellViewModel {
         self.label = "B"
         self.name = resultModel.blogName
         self.title = resultModel.title
+        self.url = resultModel.url
         guard let date = Constants.ISO8601StringToDate(resultModel.dateTime) else  {
             self.dateString = ""
             return
@@ -34,6 +36,7 @@ struct ListCellViewModel {
         self.label = "C"
         self.name = resultModel.cafeName
         self.title = resultModel.title
+        self.url = resultModel.url
         guard let date = Constants.ISO8601StringToDate(resultModel.dateTime) else  {
             self.dateString = ""
             return

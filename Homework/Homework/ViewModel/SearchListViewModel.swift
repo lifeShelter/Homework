@@ -100,9 +100,10 @@ class SearchListViewModel {
                 }
             }).disposed(by: disposeBag)
         
-        Observable.combineLatest(blogResult.map(makeListCellViewModel(_:)), cafeResult.map(makeListCellViewModel(_:))) {
-            $0 + $1
-        }.bind(to: combineResult).disposed(by: disposeBag)
+        Observable.zip(blogResult.map(makeListCellViewModel(_:)), cafeResult.map(makeListCellViewModel(_:)))
+            .map {
+                $0.0 + $0.1
+            }.bind(to: combineResult).disposed(by: disposeBag)
         
         combineResult.withLatestFrom(pageResults) {
             $1 + $0
