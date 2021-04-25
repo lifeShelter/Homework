@@ -100,11 +100,11 @@ class SearchListViewController: UIViewController {
     
     
     private func outputBinding() {
-        viewModel.historyRelay.subscribe(onNext:{[weak self] array in
+        viewModel.searchHistoryRelay.subscribe(onNext:{[weak self] array in
             self?.historyDropDown.dataSource = array
         }).disposed(by: disposeBag)
         
-        viewModel.showHistory.subscribe(onNext:{[weak self] _ in
+        viewModel.showSearchHistory.subscribe(onNext:{[weak self] _ in
             self?.historyDropDown.show()
         }).disposed(by: disposeBag)
         

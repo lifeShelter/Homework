@@ -13,7 +13,7 @@ import RxCocoa
 class SearchListViewModel {
     // private
     private var disposeBag = DisposeBag()
-    private let searchStart = PublishRelay<String>()
+    private let searchTextReady = PublishRelay<String>()
     private let filterAndSortChanged = BehaviorRelay<(FilterEnum,SortEnum)>(value: (.all, .title))
     private let requestModel = PublishRelay<SearchRequestModel>()
     private let blogResult = PublishRelay<[BlogSearchResultModel]>()
@@ -33,36 +33,65 @@ class SearchListViewModel {
     let needsMoreLoading  = PublishRelay<Void>()
     
     // output
-    let historyRelay = BehaviorRelay<[String]>(value: [])
-    let showHistory = PublishRelay<Void>()
+    let searchHistoryRelay = BehaviorRelay<[String]>(value: [])
+    let showSearchHistory = PublishRelay<Void>()
     let searchResultList = BehaviorRelay<[ListCellViewModel]>(value: [])
     let showDetail = PublishRelay<ListCellViewModel>()
     
     
+    //MARK: - init
     init() {
+        setupClearLists()
+        setupSearchText()
+        setupSearchHistory()
+        setupFilterAndSort()
+        setupRequestModel()
+        setupServiceResults()
+        setupSearchResultList()
+        setupShowDetail()
+        setupPaging()
+    }
+    
+    
+    //MARK: - setup
+    private func setupClearLists() {
         tapSearchButton.subscribe(onNext:{ [weak self]  in
             self?.combineResult.accept([])
             self?.searchResultList.accept([])
             self?.pageResults.accept([])
         }).disposed(by: disposeBag)
-        
+    }
+    
+    
+    private func setupSearchText() {
         tapSearchButton.withLatestFrom(searchBarText)
             .map { $0.trimmingCharacters(in: .whitespacesAndNewlines)}
             .filter { $0 != ""}
-            .bind(to: searchStart).disposed(by: disposeBag)
-        
-        searchStart.map(addHistory(_:)).subscribe().disposed(by: disposeBag)
-        
-        historyRelay.accept(getHistory())
-        
-        searchBarBeginEdit.bind(to: showHistory).disposed(by: disposeBag)
-        
+            .bind(to: searchTextReady).disposed(by: disposeBag)
+    }
+    
+    
+    private func setupSearchHistory() {
+        searchTextReady.map(addSearchHistory(_:)).subscribe().disposed(by: disposeBag)
+        searchHistoryRelay.accept(getSearchHistory())
+        searchBarBeginEdit.bind(to: showSearchHistory).disposed(by: disposeBag)
+    }
+    
+    
+    private func setupFilterAndSort() {
         Observable.combineLatest(filterType, sortType)
             .bind(to: filterAndSortChanged).disposed(by: disposeBag)
-        
-        searchStart.map(makeRequestModel(_:))
-            .bind(to: requestModel).disposed(by: disposeBag)
-        
+        filterAndSortChanged.withLatestFrom(pageResults,resultSelector: filterAndSortArray)
+            .bind(to: searchResultList).disposed(by: disposeBag)
+    }
+    
+    
+    private func setupRequestModel() {
+        searchTextReady.map(makeRequestModel(_:)).bind(to: requestModel).disposed(by: disposeBag)
+    }
+    
+    
+    private func setupServiceResults() {
         requestModel
             .flatMap(BlogSearchService.blogSearch(_:))
             .subscribe(onNext:{ [weak self]  in
@@ -104,7 +133,10 @@ class SearchListViewModel {
                     break
                 }
             }).disposed(by: disposeBag)
-        
+    }
+    
+    
+    private func setupSearchResultList() {
         Observable.zip(blogResult.map(makeListCellViewModel(_:)), cafeResult.map(makeListCellViewModel(_:)))
             .map {
                 $0.0 + $0.1
@@ -120,14 +152,17 @@ class SearchListViewModel {
                 self?.nowLoading.accept(false)
                 return $1 + $0
             }.bind(to: searchResultList).disposed(by: disposeBag)
-        
-        filterAndSortChanged.withLatestFrom(pageResults,resultSelector: filterAndSortArray)
-            .bind(to: searchResultList).disposed(by: disposeBag)
-        
+    }
+    
+    
+    private func setupShowDetail() {
         cellSelected.withLatestFrom(searchResultList) {
             $1[$0.row]
         }.bind(to: showDetail).disposed(by: disposeBag)
-        
+    }
+    
+    
+    private func setupPaging() {
         needsMoreLoading.withLatestFrom(nowLoading)
             .filter {$0 == false}
             .map { !$0 }.bind(to: nowLoading).disposed(by: disposeBag)
@@ -138,15 +173,16 @@ class SearchListViewModel {
                 var requestModel =  $0
                 if let page =  requestModel.page {
                     requestModel.page = page + 1
-//                    print("page = \(String(describing: requestModel.page))")
+                    print("page = \(String(describing: requestModel.page))")
                 }
                 return requestModel
             }.bind(to: requestModel).disposed(by: disposeBag)
     }
     
     
-    private func addHistory(_ str:String) {
-        let history = getHistory()
+    //MARK: - history
+    private func addSearchHistory(_ str:String) {
+        let history = getSearchHistory()
         if history.count == 0 {
             UserDefaults.standard.setValue( [str], forKey: "history")
             UserDefaults.standard.synchronize()
@@ -158,11 +194,11 @@ class SearchListViewModel {
         //        print("historySet = \(historySet)")
         UserDefaults.standard.setValue(Array(historySet), forKey: "history")
         UserDefaults.standard.synchronize()
-        historyRelay.accept(Array(historySet))
+        searchHistoryRelay.accept(Array(historySet))
     }
     
     
-    private func getHistory() -> Array<String> {
+    private func getSearchHistory() -> Array<String> {
         if let history = UserDefaults.standard.array(forKey: "history") as? Array<String> {
             return history
         } else {
@@ -171,11 +207,13 @@ class SearchListViewModel {
     }
     
     
+    //MARK: - requestModel
     private func makeRequestModel(_ str:String) -> SearchRequestModel {
         return SearchRequestModel(str)
     }
     
     
+    //MARK: - ListCellViewModel
     private func makeListCellViewModel(_ blogResult:[BlogSearchResultModel]) -> [ListCellViewModel] {
         if blogResult.count == 0 {
             return  []
@@ -196,6 +234,7 @@ class SearchListViewModel {
     }
     
     
+    //MARK: - filter and sort
     private func filterAndSortArray(_ array:[ListCellViewModel],_ filterAndSort:(FilterEnum,SortEnum)) -> [ListCellViewModel] {
             let filterArray = array.filter {
                 if filterAndSort.0 == .cafe {
