@@ -52,6 +52,11 @@ class SearchListViewController: UIViewController {
     private func setupDefaults() {
         setupFilterDropDown()
         setupHistoryDropDown()
+        setupTableView()
+    }
+    
+    
+    private func setupTableView() {
         tableView.rx.setDelegate(self).disposed(by: disposeBag)
     }
     
@@ -83,6 +88,13 @@ class SearchListViewController: UIViewController {
         searchButton.rx.tap.bind(to: viewModel.tapSearchButton).disposed(by: disposeBag)
         searchBar.rx.textDidBeginEditing.bind(to: viewModel.searchBarBeginEdit).disposed(by: disposeBag)
         tableView.rx.itemSelected.bind(to: viewModel.cellSelected).disposed(by:disposeBag)
+        tableView.rx.willDisplayCell.subscribe(onNext:{[weak self] cell, indexPath  in
+            if let numOfRow  = self?.tableView.numberOfRows(inSection: 0) {
+                if indexPath.row == numOfRow - 1 {
+                    print("last cell")
+                }
+            }
+        }).disposed(by: disposeBag)
     }
     
     
