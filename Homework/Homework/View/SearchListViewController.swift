@@ -12,15 +12,20 @@ import DropDown
 
 
 class SearchListViewController: UIViewController {
+    // private
     private var disposeBag = DisposeBag()
     private let viewModel = SearchListViewModel()
     private var historyDropDown = DropDown()
     private var filterDropDown = DropDown()
+    private let headerHeight:CGFloat = 40
+    
+    // IBOutlet
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     
     
+    //MARK: - override
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDefaults()
@@ -30,7 +35,7 @@ class SearchListViewController: UIViewController {
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        view.endEditing(true)
+        endEditing()
     }
     
     
@@ -43,6 +48,7 @@ class SearchListViewController: UIViewController {
     }
     
     
+    //MARK: - setup
     private func setupDefaults() {
         setupFilterDropDown()
         setupHistoryDropDown()
@@ -65,11 +71,12 @@ class SearchListViewController: UIViewController {
             self?.historyDropDown.clearSelection()
         }
         historyDropDown.cancelAction = { [weak self] in
-            self?.view.endEditing(true)
+            self?.endEditing()
         }
     }
     
     
+    //MARK: - Binding
     private func inputBinding() {
         searchBar.rx.text.orEmpty.bind(to: viewModel.searchBarText).disposed(by: disposeBag)
         searchBar.rx.searchButtonClicked.bind(to: viewModel.tapSearchButton).disposed(by: disposeBag)
@@ -83,20 +90,28 @@ class SearchListViewController: UIViewController {
         viewModel.historyRelay.subscribe(onNext:{[weak self] array in
             self?.historyDropDown.dataSource = array
         }).disposed(by: disposeBag)
+        
         viewModel.showHistory.subscribe(onNext:{[weak self] _ in
             self?.historyDropDown.show()
         }).disposed(by: disposeBag)
+        
         viewModel.searchResultList
             .observe(on: MainScheduler.instance)
             .bind(to: tableView.rx.items(cellIdentifier: "listCell",cellType: ListTableViewCell.self))  { index, item, cell in
                 cell.setDatas(item)
             }.disposed(by: disposeBag)
+        
         viewModel.showDetail.subscribe(onNext:{[weak self] in
             self?.performSegue(withIdentifier: "showDetail", sender: $0)
+        }).disposed(by: disposeBag)
+        
+        viewModel.tapSearchButton.subscribe(onNext: {[weak self] _ in
+            self?.endEditing()
         }).disposed(by: disposeBag)
     }
     
     
+    //MARK: - private func
     private func showActionSheet() {
         let actionSheet = UIAlertController(title: "정렬기준", message: nil, preferredStyle: .actionSheet)
         let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
@@ -111,16 +126,23 @@ class SearchListViewController: UIViewController {
         actionSheet.addAction(dateTimeAction)
         present(actionSheet, animated: true, completion: nil)
     }
+    
+    
+    private func  endEditing() {
+        historyDropDown.hide()
+        view.endEditing(true)
+    }
 }
 
 
+//MARK: - UITableViewDelegate
 extension SearchListViewController:UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FilterCell") as? FilterTableViewCell else {
             print("filtercell load fail")
             return UIView()
         }
+        
         filterDropDown.anchorView  = cell.textField
         filterDropDown.selectionAction = { [weak self] index, item in
             cell.textField.text = item
@@ -138,17 +160,7 @@ extension SearchListViewController:UITableViewDelegate {
     
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
+        return headerHeight
     }
-    
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 120
-    }
-    
-    
-    //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    //        self.performSegue(withIdentifier: "showDetail", sender: nil)
-    //    }
 }
 
