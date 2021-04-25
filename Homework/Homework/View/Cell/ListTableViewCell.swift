@@ -37,11 +37,11 @@ class ListTableViewCell: UITableViewCell {
     
     
     func setDatas(_ item:ListCellViewModel) {
-        typeLabel.text = item.label
+        typeLabel.text = item.typeLabel
         nameLabel.text = item.name
         let font = titleLabel.font
         let color = titleLabel.textColor.hexDescription()
-        titleLabel.attributedText = item.title.htmlEscaped(font: font ?? UIFont.systemFont(ofSize: 17), colorHex: color, lineSpacing: 1.0)
+        titleLabel.attributedText = item.title.htmlEscaped(font: font ?? UIFont.systemFont(ofSize: 17), colorHex: color, lineSpacing: 1.0, textAlignment: .left)
         dateTimeLabel.text = item.dateString
         if item.thunmbnail != "" {
             LoadImageService.loadImage(from: item.thunmbnail)

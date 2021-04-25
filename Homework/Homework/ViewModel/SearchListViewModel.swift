@@ -238,9 +238,9 @@ class SearchListViewModel {
     private func filterAndSortArray(_ array:[ListCellViewModel],_ filterAndSort:(FilterEnum,SortEnum)) -> [ListCellViewModel] {
             let filterArray = array.filter {
                 if filterAndSort.0 == .cafe {
-                    return $0.label == "C"
+                    return $0.typeLabel == "C"
                 } else if filterAndSort.0 == .blog {
-                    return $0.label == "B"
+                    return $0.typeLabel == "B"
                 }
                 return true
             }

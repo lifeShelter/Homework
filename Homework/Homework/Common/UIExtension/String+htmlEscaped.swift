@@ -10,10 +10,11 @@ import UIKit
 
 
 extension String {
-    func htmlEscaped(font: UIFont, colorHex: String, lineSpacing: CGFloat) -> NSAttributedString {
+    func htmlEscaped(font: UIFont, colorHex: String, lineSpacing: CGFloat,textAlignment:NSTextAlignment) -> NSAttributedString {
         let style = """
                     <style>
                     p.normal {
+                      text-align:\((textAlignment == .center) ? "center":"left");
                       line-height: \(lineSpacing);
                       font-size: \(font.pointSize)px;
                       font-family: \(font.familyName);
