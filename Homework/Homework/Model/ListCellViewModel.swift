@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct ListCellViewModel {
+struct ListCellViewModel: Hashable {
     let thunmbnail:String
     let label:String
     let name:String
@@ -42,5 +42,17 @@ struct ListCellViewModel {
             return
         }
         self.dateString = Constants.dateToDateString(date)
+    }
+    
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(url)
+    }
+}
+
+
+extension ListCellViewModel:Equatable {
+    static func == (lhs:ListCellViewModel, rhs:ListCellViewModel) -> Bool {
+        return lhs.url == rhs.url
     }
 }

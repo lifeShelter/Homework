@@ -45,6 +45,7 @@ class SearchListViewModel {
             self?.searchResultList.accept([])
             self?.pageResults.accept([])
         }).disposed(by: disposeBag)
+        
         tapSearchButton.withLatestFrom(searchBarText)
             .map { $0.trimmingCharacters(in: .whitespacesAndNewlines)}
             .filter { $0 != ""}
@@ -117,7 +118,10 @@ class SearchListViewModel {
             .withLatestFrom(filterAndSortChanged,resultSelector: filterAndSortArray)
             .withLatestFrom(searchResultList) { [weak self] in
                 self?.nowLoading.accept(false)
-                return $1 + $0
+                let array = $1 + $0
+                let resultSet:Set<ListCellViewModel> = Set(array.map { $0 })
+//                print("resultSet=\(resultSet)")
+                return Array(resultSet)
             }.bind(to: searchResultList).disposed(by: disposeBag)
         
         filterAndSortChanged.withLatestFrom(pageResults,resultSelector: filterAndSortArray)
