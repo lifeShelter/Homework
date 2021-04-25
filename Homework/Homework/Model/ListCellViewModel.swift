@@ -10,37 +10,45 @@ import Foundation
 
 struct ListCellViewModel: Hashable {
     let thunmbnail:String
-    let label:String
+    let typeLabel:String
     let name:String
     let title:String
     let dateString:String
     let url:String
-    
+    let contents:String
+    let date:Date
+    var isOpenWebPage:Bool = false
     
     init(_ resultModel:BlogSearchResultModel) {
         self.thunmbnail = resultModel.thumbnail
-        self.label = "B"
+        self.typeLabel = "B"
         self.name = resultModel.blogName
         self.title = resultModel.title
         self.url = resultModel.url
+        self.contents = resultModel.contents
         guard let date = Constants.ISO8601StringToDate(resultModel.dateTime) else  {
             self.dateString = ""
+            self.date = Date()
             return
         }
+        self.date = date
         self.dateString = Constants.dateToDateString(date)
     }
     
     
     init(_ resultModel:CafeSearchResultModel) {
         self.thunmbnail = resultModel.thumbnail
-        self.label = "C"
+        self.typeLabel = "C"
         self.name = resultModel.cafeName
         self.title = resultModel.title
         self.url = resultModel.url
+        self.contents = resultModel.contents
         guard let date = Constants.ISO8601StringToDate(resultModel.dateTime) else  {
             self.dateString = ""
+            self.date = Date()
             return
         }
+        self.date = date
         self.dateString = Constants.dateToDateString(date)
     }
     

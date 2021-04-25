@@ -19,9 +19,9 @@ class Constants {
     }
     
     
-    static func dateToYYYYMMDDString(_ date:Date) -> String {
+    static func dateToDateString(_ date:Date, dateFormat:String) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy년 MM월 dd일"
+        dateFormatter.dateFormat = dateFormat
         dateFormatter.locale = Locale(identifier: "ko")
         return dateFormatter.string(from: date)
     }
@@ -45,7 +45,7 @@ class Constants {
         } else if isYesterday(date) {
             return "어제"
         } else {
-            return dateToYYYYMMDDString(date)
+            return dateToDateString(date,dateFormat: "yyyy년 MM월 dd일")
         }
     }
 }

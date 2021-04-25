@@ -43,6 +43,10 @@ class SearchListViewController: UIViewController {
         if segue.identifier == "showDetail" {
             if let destNaviContrl = segue.destination as? UINavigationController, let dest = destNaviContrl.topViewController as? DetailViewController {
                 dest.listCellViewModel = sender as? ListCellViewModel
+                dest.closeAction = { listModel in
+                    print("close action \(listModel)")
+//                    self?.viewModel.
+                }
             }
         }
     }
