@@ -19,6 +19,8 @@ class SearchListViewModel {
     private let blogResult = PublishRelay<[BlogSearchResultModel]>()
     private let cafeResult = PublishRelay<[CafeSearchResultModel]>()
     private let combineResult = PublishRelay<[ListCellViewModel]>()
+    private let nowLoading = BehaviorRelay<Bool>(value: false)
+    private let updateRequestModel = PublishRelay<SearchRequestModel>()
     
     // input
     let searchBarText = PublishRelay<String>()
@@ -27,6 +29,7 @@ class SearchListViewModel {
     let filterType = BehaviorRelay<FilterEnum>(value:.all)
     let sortType = BehaviorRelay<SortEnum>(value:.title)
     let cellSelected = PublishRelay<IndexPath>()
+    let needsMoreLoading  = PublishRelay<Void>()
     
     // output
     let historyRelay = BehaviorRelay<[String]>(value: [])
@@ -52,6 +55,9 @@ class SearchListViewModel {
             .bind(to: filterAndSortChanged).disposed(by: disposeBag)
         
         searchStart.map(makeRequestModel(_:))
+            .bind(to: requestModel).disposed(by: disposeBag)
+        
+        requestModel
             .flatMap(BlogSearchService.blogSearch(_:))
             .subscribe(onNext:{ [weak self]  in
                 switch $0 {
@@ -64,15 +70,15 @@ class SearchListViewModel {
                 case .failure(.emptyResult):
                     break
                 case .success(_):
-                _ = $0.map {
-                    print($0)
-                    self?.blogResult.accept($0)
-                }
-                break
+                    _ = $0.map {
+//                        print($0)
+                        self?.blogResult.accept($0)
+                    }
+                    break
                 }
             }).disposed(by: disposeBag)
         
-        searchStart.map(makeRequestModel(_:))
+        requestModel
             .flatMap(CafeSearchService.cafeSearch(_:))
             .subscribe(onNext:{ [weak self]  in
                 switch $0 {
@@ -85,11 +91,11 @@ class SearchListViewModel {
                 case .failure(.emptyResult):
                     break
                 case .success(_):
-                _ = $0.map {
-                    print($0)
-                    self?.cafeResult.accept($0)
-                }
-                break
+                    _ = $0.map {
+//                        print($0)
+                        self?.cafeResult.accept($0)
+                    }
+                    break
                 }
             }).disposed(by: disposeBag)
         
@@ -97,7 +103,7 @@ class SearchListViewModel {
             $0 + $1
         }.bind(to: combineResult).disposed(by: disposeBag)
         
-        Observable.combineLatest(combineResult.filter{$0.count > 0}, filterAndSortChanged) { array, filterAndSort in
+        Observable.combineLatest(combineResult.filter{$0.count > 0}, filterAndSortChanged) { array, filterAndSort -> [ListCellViewModel] in
             let filterArray = array.filter {
                 if filterAndSort.0 == .cafe {
                     return $0.label == "C"
@@ -113,11 +119,29 @@ class SearchListViewModel {
                     return left.dateString < right.dateString
                 }
             }
+        }.withLatestFrom(searchResultList) { [weak self] in
+            self?.nowLoading.accept(false)
+            return $1 + $0
         }.bind(to: searchResultList).disposed(by: disposeBag)
         
         cellSelected.withLatestFrom(searchResultList) {
             $1[$0.row]
         }.bind(to: showDetail).disposed(by: disposeBag)
+        
+        needsMoreLoading.withLatestFrom(nowLoading)
+            .filter {$0 == false}
+            .map { !$0 }.bind(to: nowLoading).disposed(by: disposeBag)
+        
+        nowLoading.filter { $0 }
+            .withLatestFrom(requestModel)
+            .map {
+                var requestModel =  $0
+                if let page =  requestModel.page {
+                    requestModel.page = page + 1
+                    print("page = \(String(describing: requestModel.page))")
+                }
+                return requestModel
+            }.bind(to: requestModel).disposed(by: disposeBag)
     }
     
     

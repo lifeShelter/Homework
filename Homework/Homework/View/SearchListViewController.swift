@@ -92,6 +92,7 @@ class SearchListViewController: UIViewController {
             if let numOfRow  = self?.tableView.numberOfRows(inSection: 0) {
                 if indexPath.row == numOfRow - 1 {
                     print("last cell")
+                    self?.viewModel.needsMoreLoading.accept(())
                 }
             }
         }).disposed(by: disposeBag)
