@@ -20,6 +20,7 @@ target 'Homework' do
     # Pods for testing
     pod 'RxTest'
     pod 'RxNimble/RxTest'
+    pod 'RxBlocking'
   end
 
   target 'HomeworkUITests' do
