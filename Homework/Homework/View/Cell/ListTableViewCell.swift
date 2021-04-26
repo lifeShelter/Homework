@@ -51,5 +51,13 @@ class ListTableViewCell: UITableViewCell {
         } else {
             thumnailView.image = nil
         }
+        var systemBackground:UIColor
+        if #available(iOS 13.0, *) {
+            systemBackground = .systemBackground
+        } else {
+            systemBackground = .white
+        }
+        self.contentView.backgroundColor = item.isOpenWebPage ? .systemGray : systemBackground
+        self.contentView.alpha = item.isOpenWebPage ? 0.8 : 1
     }
 }

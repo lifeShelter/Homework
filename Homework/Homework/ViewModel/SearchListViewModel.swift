@@ -12,6 +12,7 @@ import RxCocoa
 
 class SearchListViewModel {
     // private
+    private var cellList:[ListCellViewModel] = []
     private var disposeBag = DisposeBag()
     private let searchTextReady = PublishRelay<String>()
     private let filterAndSortChanged = BehaviorRelay<(FilterEnum,SortEnum)>(value: (.all, .title))
@@ -106,7 +107,7 @@ class SearchListViewModel {
                     break
                 case .success(_):
                     _ = $0.map {
-//                        print($0)
+                        //                        print($0)
                         self?.blogResult.accept($0)
                     }
                     break
@@ -127,7 +128,7 @@ class SearchListViewModel {
                     break
                 case .success(_):
                     _ = $0.map {
-//                        print($0)
+                        //                        print($0)
                         self?.cafeResult.accept($0)
                     }
                     break
@@ -150,7 +151,9 @@ class SearchListViewModel {
             .withLatestFrom(filterAndSortChanged,resultSelector: filterAndSortArray)
             .withLatestFrom(searchResultList) { [weak self] in
                 self?.nowLoading.accept(false)
-                return $1 + $0
+                let returnArray = $1 + $0
+                self?.cellList = returnArray
+                return returnArray
             }.bind(to: searchResultList).disposed(by: disposeBag)
     }
     
@@ -236,22 +239,23 @@ class SearchListViewModel {
     
     //MARK: - filter and sort
     private func filterAndSortArray(_ array:[ListCellViewModel],_ filterAndSort:(FilterEnum,SortEnum)) -> [ListCellViewModel] {
-            let filterArray = array.filter {
-                if filterAndSort.0 == .cafe {
-                    return $0.typeLabel == "C"
-                } else if filterAndSort.0 == .blog {
-                    return $0.typeLabel == "B"
-                }
-                return true
+        let deletedArray = deleteDuplicate(array)
+        let filterArray = deletedArray.filter {
+            if filterAndSort.0 == .cafe {
+                return $0.typeLabel == "C"
+            } else if filterAndSort.0 == .blog {
+                return $0.typeLabel == "B"
             }
-            let returnArray =   filterArray.sorted { left, right -> Bool in
-                if filterAndSort.1 == .title {
-                    return left.title < right.title
-                } else {
-                    return left.dateString < right.dateString
-                }
+            return true
+        }
+        let returnArray =   filterArray.sorted { left, right -> Bool in
+            if filterAndSort.1 == .title {
+                return left.title < right.title
+            } else {
+                return left.dateString < right.dateString
             }
-        return deleteDuplicate(returnArray)
+        }
+        return returnArray
     }
     
     private func filterAndSortArray(_ filterAndSort:(FilterEnum,SortEnum),_ array:[ListCellViewModel]) -> [ListCellViewModel] {
@@ -262,5 +266,19 @@ class SearchListViewModel {
     private func deleteDuplicate(_ array:[ListCellViewModel]) ->[ListCellViewModel] {
         let resultSet:Set<ListCellViewModel> = Set(array.map { $0 })
         return Array(resultSet)
+    }
+    
+    
+    //MARK: - public
+    func updateCell(_ listModel:ListCellViewModel) {
+        print("updateCell")
+        cellList = cellList.map {
+            if $0  == listModel {
+                return listModel
+            } else {
+                return $0
+            }
+        }
+        searchResultList.accept(cellList)
     }
 }
