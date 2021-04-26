@@ -125,6 +125,10 @@ class SearchListViewController: UIViewController {
         viewModel.tapSearchButton.subscribe(onNext: {[weak self] _ in
             self?.endEditing()
         }).disposed(by: disposeBag)
+        
+        viewModel.showError.observe(on: MainScheduler.instance).subscribe(onNext:{[weak self] in
+            self?.showErrorAlert($0)
+        }).disposed(by: disposeBag)
     }
     
     
@@ -148,6 +152,14 @@ class SearchListViewController: UIViewController {
     private func  endEditing() {
         historyDropDown.hide()
         view.endEditing(true)
+    }
+    
+    
+    private func showErrorAlert(_ msg:String) {
+        let alert = UIAlertController(title: "에러", message: msg, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
     }
 }
 

@@ -39,6 +39,7 @@ class SearchListViewModel {
     let showSearchHistory = PublishRelay<Void>()
     let searchResultList = BehaviorRelay<[ListCellViewModel]>(value: [])
     let showDetail = PublishRelay<ListCellViewModel>()
+    let showError = PublishRelay<String>()
     
     
     //MARK: - init
@@ -99,16 +100,19 @@ class SearchListViewModel {
             .subscribe(onNext:{ [weak self]  in
                 switch $0 {
                 case .failure(.invalidJson):
+                    self?.showError.accept("요청값이 잘못되었습니다.")
                     break
                 case .failure(.networkError):
+                    self?.showError.accept("네트워크 에러가 발생했습니다.")
                     break
                 case .failure(.notAuthorized):
+                    self?.showError.accept("네트워크 반환값에 에러가 있습니다.")
                     break
                 case .failure(.emptyResult):
+                    self?.showError.accept("검색결과가 없습니다.")
                     break
                 case .success(_):
                     _ = $0.map {
-                        //                        print($0)
                         self?.blogResult.accept($0)
                     }
                     break
@@ -120,16 +124,19 @@ class SearchListViewModel {
             .subscribe(onNext:{ [weak self]  in
                 switch $0 {
                 case .failure(.invalidJson):
+                    self?.showError.accept("요청값이 잘못되었습니다.")
                     break
                 case .failure(.networkError):
+                    self?.showError.accept("네트워크 에러가 발생했습니다.")
                     break
                 case .failure(.notAuthorized):
+                    self?.showError.accept("네트워크 반환값에 에러가 있습니다.")
                     break
                 case .failure(.emptyResult):
+                    self?.showError.accept("검색결과가 없습니다.")
                     break
                 case .success(_):
                     _ = $0.map {
-                        //                        print($0)
                         self?.cafeResult.accept($0)
                     }
                     break
@@ -179,7 +186,6 @@ class SearchListViewModel {
                 var requestModel =  $0
                 if let page =  requestModel.page {
                     requestModel.page = page + 1
-                    print("page = \(String(describing: requestModel.page))")
                 }
                 return requestModel
             }.bind(to: requestModel).disposed(by: disposeBag)
@@ -197,10 +203,9 @@ class SearchListViewModel {
         
         var historySet:Set<String> = Set(history.map {$0})
         historySet.insert(str)
-        //        print("historySet = \(historySet)")
         UserDefaults.standard.setValue(Array(historySet), forKey: "history")
         UserDefaults.standard.synchronize()
-        searchHistoryRelay.accept(Array(historySet))
+        searchHistoryRelay.accept(Array(historySet).sorted(by: <))
     }
     
     
