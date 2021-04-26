@@ -33,6 +33,7 @@ struct ListCellViewModel: Hashable {
         }
         self.date = date
         self.dateString = Constants.dateToDateString(date)
+        self.isOpenWebPage = checkIsOpenPage(resultModel.url)
     }
     
     
@@ -50,11 +51,21 @@ struct ListCellViewModel: Hashable {
         }
         self.date = date
         self.dateString = Constants.dateToDateString(date)
+        self.isOpenWebPage = checkIsOpenPage(resultModel.url)
     }
     
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(url)
+    }
+    
+    
+    private func checkIsOpenPage(_ url:String) -> Bool {
+        if UserDefaults.standard.string(forKey: url) != nil {
+            return true
+        } else {
+            return false
+        }
     }
 }
 

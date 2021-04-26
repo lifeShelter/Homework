@@ -13,6 +13,7 @@ import RxCocoa
 class SearchListViewModel {
     // private
     private var cellList:[ListCellViewModel] = []
+    private var pageList:[ListCellViewModel] = []
     private var disposeBag = DisposeBag()
     private let searchTextReady = PublishRelay<String>()
     private let filterAndSortChanged = BehaviorRelay<(FilterEnum,SortEnum)>(value: (.all, .title))
@@ -143,8 +144,10 @@ class SearchListViewModel {
                 $0.0 + $0.1
             }.bind(to: combineResult).disposed(by: disposeBag)
         
-        combineResult.withLatestFrom(pageResults) {
-            $1 + $0
+        combineResult.withLatestFrom(pageResults) { [weak self] in
+            let array  = $1 + $0
+            self?.pageList = array
+            return array
         }.bind(to: pageResults).disposed(by: disposeBag)
         
         combineResult.filter{$0.count > 0}
@@ -279,6 +282,14 @@ class SearchListViewModel {
                 return $0
             }
         }
+        pageList = pageList.map {
+            if $0 == listModel {
+                return listModel
+            } else {
+                return $0
+            }
+        }
         searchResultList.accept(cellList)
+        pageResults.accept(pageList)
     }
 }

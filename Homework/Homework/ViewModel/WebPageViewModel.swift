@@ -21,6 +21,10 @@ class WebPageViewModel {
     
     init(_ listViewModel:ListCellViewModel) {
         naviTitleText.accept((listViewModel.typeLabel == "B") ? "Blog" : "Cafe")
+        
+        UserDefaults.standard.setValue(listViewModel.url, forKey: listViewModel.url)
+        UserDefaults.standard.synchronize()
+        
         if let url = URL(string:listViewModel.url) {
             let request = URLRequest(url: url)
             urlRequest.accept(request)
