@@ -76,7 +76,7 @@ class SearchListViewModel {
     
     private func setupSearchHistory() {
         searchTextReady.map(addSearchHistory(_:)).subscribe().disposed(by: disposeBag)
-        searchHistoryRelay.accept(getSearchHistory())
+        searchHistoryRelay.accept(getSearchHistory().sorted(by: <))
         searchBarBeginEdit.bind(to: showSearchHistory).disposed(by: disposeBag)
     }
     
@@ -113,6 +113,7 @@ class SearchListViewModel {
                     break
                 case .success(_):
                     _ = $0.map {
+                        print($0)
                         self?.blogResult.accept($0)
                     }
                     break

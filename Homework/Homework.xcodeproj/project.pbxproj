@@ -35,8 +35,9 @@
 		30ACB27E2632ABD7003F1B60 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30ACB27C2632ABD7003F1B60 /* Main.storyboard */; };
 		30ACB2802632ABD8003F1B60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30ACB27F2632ABD8003F1B60 /* Assets.xcassets */; };
 		30ACB2832632ABD8003F1B60 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30ACB2812632ABD8003F1B60 /* LaunchScreen.storyboard */; };
-		30ACB28E2632ABD8003F1B60 /* HomeworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30ACB28D2632ABD8003F1B60 /* HomeworkTests.swift */; };
 		30ACB2992632ABD8003F1B60 /* HomeworkUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30ACB2982632ABD8003F1B60 /* HomeworkUITests.swift */; };
+		30FE948D2636B366005302F0 /* ConstantsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FE948C2636B366005302F0 /* ConstantsTest.swift */; };
+		30FE94942636B37B005302F0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308C7B6E2633A9E800CB4605 /* Constants.swift */; };
 		679EF7990C9BEE81EA8C9FD9 /* Pods_HomeworkTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B02EA3EE8972B9CB23069D8 /* Pods_HomeworkTests.framework */; };
 		78969C147CC2DD3A8A2B920E /* Pods_Homework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C6750380326895E2AAA6969 /* Pods_Homework.framework */; };
 		93A305796FB874EEB0499340 /* Pods_Homework_HomeworkUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 347E3E0315CE0CE04812CFB1 /* Pods_Homework_HomeworkUITests.framework */; };
@@ -94,11 +95,11 @@
 		30ACB2822632ABD8003F1B60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		30ACB2842632ABD8003F1B60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		30ACB2892632ABD8003F1B60 /* HomeworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HomeworkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		30ACB28D2632ABD8003F1B60 /* HomeworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeworkTests.swift; sourceTree = "<group>"; };
 		30ACB28F2632ABD8003F1B60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		30ACB2942632ABD8003F1B60 /* HomeworkUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HomeworkUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		30ACB2982632ABD8003F1B60 /* HomeworkUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeworkUITests.swift; sourceTree = "<group>"; };
 		30ACB29A2632ABD8003F1B60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		30FE948C2636B366005302F0 /* ConstantsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantsTest.swift; sourceTree = "<group>"; };
 		347E3E0315CE0CE04812CFB1 /* Pods_Homework_HomeworkUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Homework_HomeworkUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		630E8C51D4C8E40D6149BCB2 /* Pods-HomeworkTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeworkTests.debug.xcconfig"; path = "Target Support Files/Pods-HomeworkTests/Pods-HomeworkTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6B610B75750AD2C8265BD4BD /* Pods-Homework-HomeworkUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Homework-HomeworkUITests.debug.xcconfig"; path = "Target Support Files/Pods-Homework-HomeworkUITests/Pods-Homework-HomeworkUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -260,7 +261,7 @@
 		30ACB28C2632ABD8003F1B60 /* HomeworkTests */ = {
 			isa = PBXGroup;
 			children = (
-				30ACB28D2632ABD8003F1B60 /* HomeworkTests.swift */,
+				30FE948B2636B358005302F0 /* ConstantsTest */,
 				30ACB28F2632ABD8003F1B60 /* Info.plist */,
 			);
 			path = HomeworkTests;
@@ -273,6 +274,14 @@
 				30ACB29A2632ABD8003F1B60 /* Info.plist */,
 			);
 			path = HomeworkUITests;
+			sourceTree = "<group>";
+		};
+		30FE948B2636B358005302F0 /* ConstantsTest */ = {
+			isa = PBXGroup;
+			children = (
+				30FE948C2636B366005302F0 /* ConstantsTest.swift */,
+			);
+			path = ConstantsTest;
 			sourceTree = "<group>";
 		};
 		59C611E7C185F2D529BD9778 /* Frameworks */ = {
@@ -568,7 +577,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				30ACB28E2632ABD8003F1B60 /* HomeworkTests.swift in Sources */,
+				30FE94942636B37B005302F0 /* Constants.swift in Sources */,
+				30FE948D2636B366005302F0 /* ConstantsTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -778,6 +788,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4798MSP7R7;
 				INFOPLIST_FILE = HomeworkTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -800,6 +811,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4798MSP7R7;
 				INFOPLIST_FILE = HomeworkTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -821,6 +833,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4798MSP7R7;
 				INFOPLIST_FILE = HomeworkUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -841,6 +854,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4798MSP7R7;
 				INFOPLIST_FILE = HomeworkUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
