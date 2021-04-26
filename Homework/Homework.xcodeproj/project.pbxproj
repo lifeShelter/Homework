@@ -36,6 +36,12 @@
 		30ACB2802632ABD8003F1B60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30ACB27F2632ABD8003F1B60 /* Assets.xcassets */; };
 		30ACB2832632ABD8003F1B60 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30ACB2812632ABD8003F1B60 /* LaunchScreen.storyboard */; };
 		30ACB2992632ABD8003F1B60 /* HomeworkUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30ACB2982632ABD8003F1B60 /* HomeworkUITests.swift */; };
+		30E5F8A62636E98D00A01EC3 /* WebPageViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E5F8A52636E98D00A01EC3 /* WebPageViewModelTest.swift */; };
+		30E5F8AD2636E9A100A01EC3 /* WebPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302D254B2635ACED006465A0 /* WebPageViewModel.swift */; };
+		30E5F8B92636EB4F00A01EC3 /* ListCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308C7B7626340FB200CB4605 /* ListCellViewModel.swift */; };
+		30E5F8CE2636ECAA00A01EC3 /* BlogSearchResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308C7B642633A99700CB4605 /* BlogSearchResultModel.swift */; };
+		30E5F8CF2636ECAA00A01EC3 /* CafeSearchResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3037CF8E263428E700ED7859 /* CafeSearchResultModel.swift */; };
+		30E5F8D52636ED1000A01EC3 /* ListCellViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E5F8D42636ED1000A01EC3 /* ListCellViewModelTest.swift */; };
 		30FE948D2636B366005302F0 /* ConstantsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FE948C2636B366005302F0 /* ConstantsTest.swift */; };
 		30FE94942636B37B005302F0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308C7B6E2633A9E800CB4605 /* Constants.swift */; };
 		679EF7990C9BEE81EA8C9FD9 /* Pods_HomeworkTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B02EA3EE8972B9CB23069D8 /* Pods_HomeworkTests.framework */; };
@@ -99,6 +105,8 @@
 		30ACB2942632ABD8003F1B60 /* HomeworkUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HomeworkUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		30ACB2982632ABD8003F1B60 /* HomeworkUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeworkUITests.swift; sourceTree = "<group>"; };
 		30ACB29A2632ABD8003F1B60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		30E5F8A52636E98D00A01EC3 /* WebPageViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPageViewModelTest.swift; sourceTree = "<group>"; };
+		30E5F8D42636ED1000A01EC3 /* ListCellViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCellViewModelTest.swift; sourceTree = "<group>"; };
 		30FE948C2636B366005302F0 /* ConstantsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantsTest.swift; sourceTree = "<group>"; };
 		347E3E0315CE0CE04812CFB1 /* Pods_Homework_HomeworkUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Homework_HomeworkUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		630E8C51D4C8E40D6149BCB2 /* Pods-HomeworkTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeworkTests.debug.xcconfig"; path = "Target Support Files/Pods-HomeworkTests/Pods-HomeworkTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -261,6 +269,8 @@
 		30ACB28C2632ABD8003F1B60 /* HomeworkTests */ = {
 			isa = PBXGroup;
 			children = (
+				30E5F8D32636ECF900A01EC3 /* ModelTest */,
+				30E5F8A42636E97600A01EC3 /* ViewModelTest */,
 				30FE948B2636B358005302F0 /* ConstantsTest */,
 				30ACB28F2632ABD8003F1B60 /* Info.plist */,
 			);
@@ -274,6 +284,22 @@
 				30ACB29A2632ABD8003F1B60 /* Info.plist */,
 			);
 			path = HomeworkUITests;
+			sourceTree = "<group>";
+		};
+		30E5F8A42636E97600A01EC3 /* ViewModelTest */ = {
+			isa = PBXGroup;
+			children = (
+				30E5F8A52636E98D00A01EC3 /* WebPageViewModelTest.swift */,
+			);
+			path = ViewModelTest;
+			sourceTree = "<group>";
+		};
+		30E5F8D32636ECF900A01EC3 /* ModelTest */ = {
+			isa = PBXGroup;
+			children = (
+				30E5F8D42636ED1000A01EC3 /* ListCellViewModelTest.swift */,
+			);
+			path = ModelTest;
 			sourceTree = "<group>";
 		};
 		30FE948B2636B358005302F0 /* ConstantsTest */ = {
@@ -595,7 +621,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30E5F8CE2636ECAA00A01EC3 /* BlogSearchResultModel.swift in Sources */,
+				30E5F8CF2636ECAA00A01EC3 /* CafeSearchResultModel.swift in Sources */,
+				30E5F8B92636EB4F00A01EC3 /* ListCellViewModel.swift in Sources */,
+				30E5F8AD2636E9A100A01EC3 /* WebPageViewModel.swift in Sources */,
+				30E5F8A62636E98D00A01EC3 /* WebPageViewModelTest.swift in Sources */,
 				30FE94942636B37B005302F0 /* Constants.swift in Sources */,
+				30E5F8D52636ED1000A01EC3 /* ListCellViewModelTest.swift in Sources */,
 				30FE948D2636B366005302F0 /* ConstantsTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -63,9 +63,8 @@ struct ListCellViewModel: Hashable {
     private func checkIsOpenPage(_ url:String) -> Bool {
         if UserDefaults.standard.string(forKey: url) != nil {
             return true
-        } else {
-            return false
         }
+        return false
     }
 }
 
