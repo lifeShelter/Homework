@@ -42,6 +42,11 @@
 		30E5F8CE2636ECAA00A01EC3 /* BlogSearchResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308C7B642633A99700CB4605 /* BlogSearchResultModel.swift */; };
 		30E5F8CF2636ECAA00A01EC3 /* CafeSearchResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3037CF8E263428E700ED7859 /* CafeSearchResultModel.swift */; };
 		30E5F8D52636ED1000A01EC3 /* ListCellViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E5F8D42636ED1000A01EC3 /* ListCellViewModelTest.swift */; };
+		30E5F9212637B4D800A01EC3 /* DetailViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E5F9202637B4D800A01EC3 /* DetailViewModelTest.swift */; };
+		30E5F9252637B4F400A01EC3 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302D25432635930B006465A0 /* DetailViewModel.swift */; };
+		30E5F9292637B5A000A01EC3 /* LoadImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302C1E6426345CFD0064E4B4 /* LoadImageService.swift */; };
+		30E5F92A2637B5A600A01EC3 /* UIColor+hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302C1E5F26343D850064E4B4 /* UIColor+hex.swift */; };
+		30E5F9312637B5B600A01EC3 /* String+htmlEscaped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302C1E5726343B8E0064E4B4 /* String+htmlEscaped.swift */; };
 		30FE948D2636B366005302F0 /* ConstantsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FE948C2636B366005302F0 /* ConstantsTest.swift */; };
 		30FE94942636B37B005302F0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308C7B6E2633A9E800CB4605 /* Constants.swift */; };
 		679EF7990C9BEE81EA8C9FD9 /* Pods_HomeworkTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B02EA3EE8972B9CB23069D8 /* Pods_HomeworkTests.framework */; };
@@ -107,6 +112,7 @@
 		30ACB29A2632ABD8003F1B60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		30E5F8A52636E98D00A01EC3 /* WebPageViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPageViewModelTest.swift; sourceTree = "<group>"; };
 		30E5F8D42636ED1000A01EC3 /* ListCellViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCellViewModelTest.swift; sourceTree = "<group>"; };
+		30E5F9202637B4D800A01EC3 /* DetailViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModelTest.swift; sourceTree = "<group>"; };
 		30FE948C2636B366005302F0 /* ConstantsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantsTest.swift; sourceTree = "<group>"; };
 		347E3E0315CE0CE04812CFB1 /* Pods_Homework_HomeworkUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Homework_HomeworkUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		630E8C51D4C8E40D6149BCB2 /* Pods-HomeworkTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeworkTests.debug.xcconfig"; path = "Target Support Files/Pods-HomeworkTests/Pods-HomeworkTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -290,6 +296,7 @@
 			isa = PBXGroup;
 			children = (
 				30E5F8A52636E98D00A01EC3 /* WebPageViewModelTest.swift */,
+				30E5F9202637B4D800A01EC3 /* DetailViewModelTest.swift */,
 			);
 			path = ViewModelTest;
 			sourceTree = "<group>";
@@ -621,12 +628,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30E5F9312637B5B600A01EC3 /* String+htmlEscaped.swift in Sources */,
+				30E5F92A2637B5A600A01EC3 /* UIColor+hex.swift in Sources */,
+				30E5F9292637B5A000A01EC3 /* LoadImageService.swift in Sources */,
+				30E5F9252637B4F400A01EC3 /* DetailViewModel.swift in Sources */,
 				30E5F8CE2636ECAA00A01EC3 /* BlogSearchResultModel.swift in Sources */,
 				30E5F8CF2636ECAA00A01EC3 /* CafeSearchResultModel.swift in Sources */,
 				30E5F8B92636EB4F00A01EC3 /* ListCellViewModel.swift in Sources */,
 				30E5F8AD2636E9A100A01EC3 /* WebPageViewModel.swift in Sources */,
 				30E5F8A62636E98D00A01EC3 /* WebPageViewModelTest.swift in Sources */,
 				30FE94942636B37B005302F0 /* Constants.swift in Sources */,
+				30E5F9212637B4D800A01EC3 /* DetailViewModelTest.swift in Sources */,
 				30E5F8D52636ED1000A01EC3 /* ListCellViewModelTest.swift in Sources */,
 				30FE948D2636B366005302F0 /* ConstantsTest.swift in Sources */,
 			);
