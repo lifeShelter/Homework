@@ -113,7 +113,6 @@ class SearchListViewModel {
                     break
                 case .success(_):
                     _ = $0.map {
-                        print($0)
                         self?.blogResult.accept($0)
                     }
                     break

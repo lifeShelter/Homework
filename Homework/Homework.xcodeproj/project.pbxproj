@@ -22,6 +22,7 @@
 		301A78F026382D9C004A7192 /* LoadImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302C1E6426345CFD0064E4B4 /* LoadImageService.swift */; };
 		301A78F526382E00004A7192 /* BlogSearchServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 301A78F426382E00004A7192 /* BlogSearchServiceTest.swift */; };
 		301A78FD263833FA004A7192 /* BlogSearchResultModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 301A78FC263833FA004A7192 /* BlogSearchResultModelTest.swift */; };
+		301A790226383617004A7192 /* CafeSearchResultModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 301A790126383617004A7192 /* CafeSearchResultModelTest.swift */; };
 		302C1E5826343B8E0064E4B4 /* String+htmlEscaped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302C1E5726343B8E0064E4B4 /* String+htmlEscaped.swift */; };
 		302C1E6026343D850064E4B4 /* UIColor+hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302C1E5F26343D850064E4B4 /* UIColor+hex.swift */; };
 		302C1E6526345CFD0064E4B4 /* LoadImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302C1E6426345CFD0064E4B4 /* LoadImageService.swift */; };
@@ -99,6 +100,7 @@
 		301A78E82638148C004A7192 /* FilterEnumTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterEnumTest.swift; sourceTree = "<group>"; };
 		301A78F426382E00004A7192 /* BlogSearchServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogSearchServiceTest.swift; sourceTree = "<group>"; };
 		301A78FC263833FA004A7192 /* BlogSearchResultModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogSearchResultModelTest.swift; sourceTree = "<group>"; };
+		301A790126383617004A7192 /* CafeSearchResultModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeSearchResultModelTest.swift; sourceTree = "<group>"; };
 		302C1E5726343B8E0064E4B4 /* String+htmlEscaped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+htmlEscaped.swift"; sourceTree = "<group>"; };
 		302C1E5F26343D850064E4B4 /* UIColor+hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+hex.swift"; sourceTree = "<group>"; };
 		302C1E6426345CFD0064E4B4 /* LoadImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImageService.swift; sourceTree = "<group>"; };
@@ -338,6 +340,7 @@
 				30E5F8D42636ED1000A01EC3 /* ListCellViewModelTest.swift */,
 				301A78E326380CEA004A7192 /* SearchRequestModelTest.swift */,
 				301A78FC263833FA004A7192 /* BlogSearchResultModelTest.swift */,
+				301A790126383617004A7192 /* CafeSearchResultModelTest.swift */,
 			);
 			path = ModelTest;
 			sourceTree = "<group>";
@@ -709,6 +712,7 @@
 				30E5F9392637B99F00A01EC3 /* UIColor+hexTest.swift in Sources */,
 				30FE94942636B37B005302F0 /* Constants.swift in Sources */,
 				301A78E92638148C004A7192 /* FilterEnumTest.swift in Sources */,
+				301A790226383617004A7192 /* CafeSearchResultModelTest.swift in Sources */,
 				30E5F9212637B4D800A01EC3 /* DetailViewModelTest.swift in Sources */,
 				301A78C22638085E004A7192 /* SearchListViewModelTest.swift in Sources */,
 				30E5F8D52636ED1000A01EC3 /* ListCellViewModelTest.swift in Sources */,
