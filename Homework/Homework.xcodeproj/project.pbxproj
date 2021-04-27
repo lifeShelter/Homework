@@ -19,6 +19,7 @@
 		301A78DA26380A1F004A7192 /* MetaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308C7B692633A9CA00CB4605 /* MetaModel.swift */; };
 		301A78DF26380AB3004A7192 /* ServiceAPITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 301A78DE26380AB3004A7192 /* ServiceAPITest.swift */; };
 		301A78E426380CEA004A7192 /* SearchRequestModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 301A78E326380CEA004A7192 /* SearchRequestModelTest.swift */; };
+		301A78E92638148C004A7192 /* FilterEnumTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 301A78E82638148C004A7192 /* FilterEnumTest.swift */; };
 		302C1E5826343B8E0064E4B4 /* String+htmlEscaped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302C1E5726343B8E0064E4B4 /* String+htmlEscaped.swift */; };
 		302C1E6026343D850064E4B4 /* UIColor+hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302C1E5F26343D850064E4B4 /* UIColor+hex.swift */; };
 		302C1E6526345CFD0064E4B4 /* LoadImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302C1E6426345CFD0064E4B4 /* LoadImageService.swift */; };
@@ -94,6 +95,7 @@
 		301A78C12638085E004A7192 /* SearchListViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListViewModelTest.swift; sourceTree = "<group>"; };
 		301A78DE26380AB3004A7192 /* ServiceAPITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAPITest.swift; sourceTree = "<group>"; };
 		301A78E326380CEA004A7192 /* SearchRequestModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRequestModelTest.swift; sourceTree = "<group>"; };
+		301A78E82638148C004A7192 /* FilterEnumTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterEnumTest.swift; sourceTree = "<group>"; };
 		302C1E5726343B8E0064E4B4 /* String+htmlEscaped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+htmlEscaped.swift"; sourceTree = "<group>"; };
 		302C1E5F26343D850064E4B4 /* UIColor+hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+hex.swift"; sourceTree = "<group>"; };
 		302C1E6426345CFD0064E4B4 /* LoadImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImageService.swift; sourceTree = "<group>"; };
@@ -359,6 +361,7 @@
 				30FE948C2636B366005302F0 /* ConstantsTest.swift */,
 				30E5F9382637B99F00A01EC3 /* UIColor+hexTest.swift */,
 				30E5F93D2637D58B00A01EC3 /* String+htmlEscapedTest.swift */,
+				301A78E82638148C004A7192 /* FilterEnumTest.swift */,
 			);
 			path = CommonTest;
 			sourceTree = "<group>";
@@ -699,6 +702,7 @@
 				30E5F8A62636E98D00A01EC3 /* WebPageViewModelTest.swift in Sources */,
 				30E5F9392637B99F00A01EC3 /* UIColor+hexTest.swift in Sources */,
 				30FE94942636B37B005302F0 /* Constants.swift in Sources */,
+				301A78E92638148C004A7192 /* FilterEnumTest.swift in Sources */,
 				30E5F9212637B4D800A01EC3 /* DetailViewModelTest.swift in Sources */,
 				301A78C22638085E004A7192 /* SearchListViewModelTest.swift in Sources */,
 				30E5F8D52636ED1000A01EC3 /* ListCellViewModelTest.swift in Sources */,
