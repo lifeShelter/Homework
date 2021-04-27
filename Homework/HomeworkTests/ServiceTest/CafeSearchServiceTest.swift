@@ -11,17 +11,16 @@ import RxCocoa
 import RxBlocking
 
 
-fileprivate let cafeSearchResult = CafeSearchResultModel(cafeName: "소울드레서 (SoulDresser)", contents: "", dateTime:  "2021-04-13T12:16:53.000+09:00", thumbnail: "https://search1.kakaocdn.net/argon/130x130_85_c/HOefMzkcvL3", title: "로제떡볶이 배달<b>맛집</b> 6대장", url: "http://cafe.daum.net/SoulDresser/FLTB/390660")
-
-
 class CafeSearchService {
     static var isNetworkOk = true
     static func cafeSearch(_ requestModel:SearchRequestModel) -> Observable<Result<[CafeSearchResultModel],ServiceError>> {
         if !isNetworkOk {
             return Observable.just(Result.failure(.networkError))
         }
-        if requestModel.query == "맛집" {
-            return Observable.just(Result.success([cafeSearchResult]))
+        if requestModel.query == "맛집" && requestModel.page == 1 {
+            return Observable.just(Result.success([Common.cafeSearchResult]))
+        } else if requestModel.query == "맛집" && requestModel.page == 2 {
+            return Observable.just(Result.success([Common.cafeSearchResult2]))
         }
         return Observable.just(Result.failure(.emptyResult))
     }
@@ -44,7 +43,7 @@ class CafeSearchServiceTest: XCTestCase {
         let result = try! CafeSearchService.cafeSearch(requestModel).toBlocking().first()!
         
         _ = result.map { array in
-            XCTAssertEqual(array[0], cafeSearchResult)
+            XCTAssertEqual(array[0], Common.cafeSearchResult)
         }
     }
     

@@ -52,6 +52,7 @@
 		30ACB2802632ABD8003F1B60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30ACB27F2632ABD8003F1B60 /* Assets.xcassets */; };
 		30ACB2832632ABD8003F1B60 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30ACB2812632ABD8003F1B60 /* LaunchScreen.storyboard */; };
 		30ACB2992632ABD8003F1B60 /* HomeworkUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30ACB2982632ABD8003F1B60 /* HomeworkUITests.swift */; };
+		30E298322638535A0084201C /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E298312638535A0084201C /* Common.swift */; };
 		30E5F8A62636E98D00A01EC3 /* WebPageViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E5F8A52636E98D00A01EC3 /* WebPageViewModelTest.swift */; };
 		30E5F8AD2636E9A100A01EC3 /* WebPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302D254B2635ACED006465A0 /* WebPageViewModel.swift */; };
 		30E5F8B92636EB4F00A01EC3 /* ListCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308C7B7626340FB200CB4605 /* ListCellViewModel.swift */; };
@@ -137,6 +138,7 @@
 		30ACB2942632ABD8003F1B60 /* HomeworkUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HomeworkUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		30ACB2982632ABD8003F1B60 /* HomeworkUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeworkUITests.swift; sourceTree = "<group>"; };
 		30ACB29A2632ABD8003F1B60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		30E298312638535A0084201C /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		30E5F8A52636E98D00A01EC3 /* WebPageViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPageViewModelTest.swift; sourceTree = "<group>"; };
 		30E5F8D42636ED1000A01EC3 /* ListCellViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCellViewModelTest.swift; sourceTree = "<group>"; };
 		30E5F9202637B4D800A01EC3 /* DetailViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModelTest.swift; sourceTree = "<group>"; };
@@ -306,6 +308,7 @@
 		30ACB28C2632ABD8003F1B60 /* HomeworkTests */ = {
 			isa = PBXGroup;
 			children = (
+				30E29830263853460084201C /* Common */,
 				30EB89DC2637EFF000984F66 /* image */,
 				30EB89D32637ED8E00984F66 /* ServiceTest */,
 				30E5F8D32636ECF900A01EC3 /* ModelTest */,
@@ -323,6 +326,14 @@
 				30ACB29A2632ABD8003F1B60 /* Info.plist */,
 			);
 			path = HomeworkUITests;
+			sourceTree = "<group>";
+		};
+		30E29830263853460084201C /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				30E298312638535A0084201C /* Common.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		30E5F8A42636E97600A01EC3 /* ViewModelTest */ = {
@@ -704,6 +715,7 @@
 				30E5F9312637B5B600A01EC3 /* String+htmlEscaped.swift in Sources */,
 				30E5F92A2637B5A600A01EC3 /* UIColor+hex.swift in Sources */,
 				30E5F9252637B4F400A01EC3 /* DetailViewModel.swift in Sources */,
+				30E298322638535A0084201C /* Common.swift in Sources */,
 				30E5F8CE2636ECAA00A01EC3 /* BlogSearchResultModel.swift in Sources */,
 				30E5F93E2637D58B00A01EC3 /* String+htmlEscapedTest.swift in Sources */,
 				30E5F8CF2636ECAA00A01EC3 /* CafeSearchResultModel.swift in Sources */,
