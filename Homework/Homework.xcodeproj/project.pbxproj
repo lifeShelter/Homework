@@ -18,6 +18,7 @@
 		301A78D626380A0E004A7192 /* CafeSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3037CF892634289900ED7859 /* CafeSearchService.swift */; };
 		301A78DA26380A1F004A7192 /* MetaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308C7B692633A9CA00CB4605 /* MetaModel.swift */; };
 		301A78DF26380AB3004A7192 /* ServiceAPITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 301A78DE26380AB3004A7192 /* ServiceAPITest.swift */; };
+		301A78E426380CEA004A7192 /* SearchRequestModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 301A78E326380CEA004A7192 /* SearchRequestModelTest.swift */; };
 		302C1E5826343B8E0064E4B4 /* String+htmlEscaped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302C1E5726343B8E0064E4B4 /* String+htmlEscaped.swift */; };
 		302C1E6026343D850064E4B4 /* UIColor+hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302C1E5F26343D850064E4B4 /* UIColor+hex.swift */; };
 		302C1E6526345CFD0064E4B4 /* LoadImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302C1E6426345CFD0064E4B4 /* LoadImageService.swift */; };
@@ -92,6 +93,7 @@
 		2120499BA7D5B8F344C325F8 /* Pods-Homework.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Homework.debug.xcconfig"; path = "Target Support Files/Pods-Homework/Pods-Homework.debug.xcconfig"; sourceTree = "<group>"; };
 		301A78C12638085E004A7192 /* SearchListViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListViewModelTest.swift; sourceTree = "<group>"; };
 		301A78DE26380AB3004A7192 /* ServiceAPITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAPITest.swift; sourceTree = "<group>"; };
+		301A78E326380CEA004A7192 /* SearchRequestModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRequestModelTest.swift; sourceTree = "<group>"; };
 		302C1E5726343B8E0064E4B4 /* String+htmlEscaped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+htmlEscaped.swift"; sourceTree = "<group>"; };
 		302C1E5F26343D850064E4B4 /* UIColor+hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+hex.swift"; sourceTree = "<group>"; };
 		302C1E6426345CFD0064E4B4 /* LoadImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImageService.swift; sourceTree = "<group>"; };
@@ -329,6 +331,7 @@
 			isa = PBXGroup;
 			children = (
 				30E5F8D42636ED1000A01EC3 /* ListCellViewModelTest.swift */,
+				301A78E326380CEA004A7192 /* SearchRequestModelTest.swift */,
 			);
 			path = ModelTest;
 			sourceTree = "<group>";
@@ -679,6 +682,7 @@
 				301A78DF26380AB3004A7192 /* ServiceAPITest.swift in Sources */,
 				301A78D626380A0E004A7192 /* CafeSearchService.swift in Sources */,
 				301A78CF26380A01004A7192 /* SearchRequestModel.swift in Sources */,
+				301A78E426380CEA004A7192 /* SearchRequestModelTest.swift in Sources */,
 				301A78CA263809F4004A7192 /* SortEnum.swift in Sources */,
 				301A78CB263809F4004A7192 /* FilterEnum.swift in Sources */,
 				301A78C6263809D9004A7192 /* SearchListViewModel.swift in Sources */,
