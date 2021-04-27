@@ -49,7 +49,7 @@ class ListTableViewCell: UITableViewCell {
                 .bind(to: thumnailView.rx.image)
                 .disposed(by: disposeBag)
         } else {
-            thumnailView.image = nil
+            thumnailView.image = #imageLiteral(resourceName: "NoImage")
         }
         var systemBackground:UIColor
         if #available(iOS 13.0, *) {
