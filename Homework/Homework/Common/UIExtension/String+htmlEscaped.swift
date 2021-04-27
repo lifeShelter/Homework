@@ -23,16 +23,11 @@ extension String {
                     </style>
         """
         let modified = String(format:"\(style)<p class=normal>%@</p>", self)
-        do {
-            guard let data = modified.data(using: .unicode) else {
-                return NSAttributedString(string: self)
-            }
-            let attributed = try NSAttributedString(data: data,
+        if let data = modified.data(using: .unicode), let attributed = try? NSAttributedString(data: data,
                                                     options: [.documentType: NSAttributedString.DocumentType.html],
-                                                    documentAttributes: nil)
+                                                    documentAttributes: nil) {
             return attributed
-        } catch {
-            return NSAttributedString(string: self)
         }
+        return NSAttributedString(string: self)
     }
 }

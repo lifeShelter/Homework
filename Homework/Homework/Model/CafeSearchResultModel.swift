@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct CafeSearchResultModel : Codable {
+struct CafeSearchResultModel : Codable, Hashable {
     let cafeName:String
     let contents:String
     let dateTime:String
@@ -24,5 +24,17 @@ struct CafeSearchResultModel : Codable {
         case thumbnail
         case title
         case url
+    }
+    
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(url)
+    }
+}
+
+
+extension CafeSearchResultModel:Equatable {
+    static func == (lhs:CafeSearchResultModel, rhs:CafeSearchResultModel) -> Bool {
+        return lhs.cafeName == rhs.cafeName && lhs.contents == rhs.contents && lhs.dateTime == rhs.dateTime && lhs.thumbnail == rhs.thumbnail && lhs.title == rhs.title && lhs.url == rhs.url
     }
 }

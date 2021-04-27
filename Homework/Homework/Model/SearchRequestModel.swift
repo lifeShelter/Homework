@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct SearchRequestModel {
+struct SearchRequestModel:Hashable {
     var query:String
     var sort:String?
     var page:Int?
@@ -35,4 +35,17 @@ struct SearchRequestModel {
         page = 1
         size = 25
     }
+    
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(query)
+    }
 }
+
+
+extension SearchRequestModel:Equatable {
+    static func == (lhs:SearchRequestModel, rhs:SearchRequestModel) -> Bool {
+        return lhs.query == rhs.query && lhs.sort == rhs.sort && lhs.page == rhs.page && lhs.size == rhs.size
+    }
+}
+

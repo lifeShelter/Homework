@@ -18,6 +18,9 @@ target 'Homework' do
   target 'HomeworkTests' do
     inherit! :search_paths
     # Pods for testing
+    pod 'RxTest'
+    pod 'RxNimble/RxTest'
+    pod 'RxBlocking'
   end
 
   target 'HomeworkUITests' do

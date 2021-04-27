@@ -58,11 +58,7 @@ class SearchListViewModel {
     
     //MARK: - setup
     private func setupClearLists() {
-        tapSearchButton.subscribe(onNext:{ [weak self]  in
-            self?.combineResult.accept([])
-            self?.searchResultList.accept([])
-            self?.pageResults.accept([])
-        }).disposed(by: disposeBag)
+        tapSearchButton.map(clearLists).subscribe().disposed(by: disposeBag)
     }
     
     
@@ -76,7 +72,7 @@ class SearchListViewModel {
     
     private func setupSearchHistory() {
         searchTextReady.map(addSearchHistory(_:)).subscribe().disposed(by: disposeBag)
-        searchHistoryRelay.accept(getSearchHistory())
+        searchHistoryRelay.accept(getSearchHistory().sorted(by: <))
         searchBarBeginEdit.bind(to: showSearchHistory).disposed(by: disposeBag)
     }
     
@@ -97,51 +93,13 @@ class SearchListViewModel {
     private func setupServiceResults() {
         requestModel
             .flatMap(BlogSearchService.blogSearch(_:))
-            .subscribe(onNext:{ [weak self]  in
-                switch $0 {
-                case .failure(.invalidJson):
-                    self?.showError.accept("요청값이 잘못되었습니다.")
-                    break
-                case .failure(.networkError):
-                    self?.showError.accept("네트워크 에러가 발생했습니다.")
-                    break
-                case .failure(.notAuthorized):
-                    self?.showError.accept("네트워크 반환값에 에러가 있습니다.")
-                    break
-                case .failure(.emptyResult):
-                    self?.showError.accept("검색결과가 없습니다.")
-                    break
-                case .success(_):
-                    _ = $0.map {
-                        self?.blogResult.accept($0)
-                    }
-                    break
-                }
-            }).disposed(by: disposeBag)
+            .map(processBlogResult)
+            .subscribe().disposed(by: disposeBag)
         
         requestModel
             .flatMap(CafeSearchService.cafeSearch(_:))
-            .subscribe(onNext:{ [weak self]  in
-                switch $0 {
-                case .failure(.invalidJson):
-                    self?.showError.accept("요청값이 잘못되었습니다.")
-                    break
-                case .failure(.networkError):
-                    self?.showError.accept("네트워크 에러가 발생했습니다.")
-                    break
-                case .failure(.notAuthorized):
-                    self?.showError.accept("네트워크 반환값에 에러가 있습니다.")
-                    break
-                case .failure(.emptyResult):
-                    self?.showError.accept("검색결과가 없습니다.")
-                    break
-                case .success(_):
-                    _ = $0.map {
-                        self?.cafeResult.accept($0)
-                    }
-                    break
-                }
-            }).disposed(by: disposeBag)
+            .map(processCafeResult)
+            .subscribe().disposed(by: disposeBag)
     }
     
     
@@ -151,20 +109,11 @@ class SearchListViewModel {
                 $0.0 + $0.1
             }.bind(to: combineResult).disposed(by: disposeBag)
         
-        combineResult.withLatestFrom(pageResults) { [weak self] in
-            let array  = $1 + $0
-            self?.pageList = array
-            return array
-        }.bind(to: pageResults).disposed(by: disposeBag)
+        combineResult.withLatestFrom(pageResults, resultSelector: addCombineResultToPageResult(_:_:)).bind(to: pageResults).disposed(by: disposeBag)
         
         combineResult.filter{$0.count > 0}
             .withLatestFrom(filterAndSortChanged,resultSelector: filterAndSortArray)
-            .withLatestFrom(searchResultList) { [weak self] in
-                self?.nowLoading.accept(false)
-                let returnArray = $1 + $0
-                self?.cellList = returnArray
-                return returnArray
-            }.bind(to: searchResultList).disposed(by: disposeBag)
+            .withLatestFrom(searchResultList,resultSelector: addSortedArrayToResultList(_:_:)).bind(to: searchResultList).disposed(by: disposeBag)
     }
     
     
@@ -192,6 +141,14 @@ class SearchListViewModel {
     }
     
     
+    //MARK: - clear
+    private func clearLists() {
+        combineResult.accept([])
+        searchResultList.accept([])
+        pageResults.accept([])
+    }
+    
+    
     //MARK: - history
     private func addSearchHistory(_ str:String) {
         let history = getSearchHistory()
@@ -212,15 +169,72 @@ class SearchListViewModel {
     private func getSearchHistory() -> Array<String> {
         if let history = UserDefaults.standard.array(forKey: "history") as? Array<String> {
             return history
-        } else {
-            return []
         }
+        return []
     }
     
     
     //MARK: - requestModel
     private func makeRequestModel(_ str:String) -> SearchRequestModel {
         return SearchRequestModel(str)
+    }
+    
+    
+    //MARK: - blogResult
+    private func processBlogResult(_ result:Result<[BlogSearchResultModel],ServiceError>) {
+        switch result {
+        case .failure(.invalidJson):
+            showError.accept("요청값이 잘못되었습니다.")
+            break
+        case .failure(.networkError):
+            showError.accept("네트워크 에러가 발생했습니다.")
+            break
+        case .failure(.notAuthorized):
+            showError.accept("네트워크 반환값에 에러가 있습니다.")
+            break
+        case .failure(.emptyResult):
+            showError.accept("검색결과가 없습니다.")
+            break
+        case .success(_):
+            _ = result.map {
+                print("blogResult = \($0)")
+                blogResult.accept($0)
+            }
+            break
+        }
+    }
+    
+    
+    //MARK: - cafeResult
+    private func processCafeResult(_ result:Result<[CafeSearchResultModel],ServiceError>) {
+        switch result {
+        case .failure(.invalidJson):
+            showError.accept("요청값이 잘못되었습니다.")
+            break
+        case .failure(.networkError):
+            showError.accept("네트워크 에러가 발생했습니다.")
+            break
+        case .failure(.notAuthorized):
+            showError.accept("네트워크 반환값에 에러가 있습니다.")
+            break
+        case .failure(.emptyResult):
+            showError.accept("검색결과가 없습니다.")
+            break
+        case .success(_):
+            _ = result.map {
+                print("cafeResult = \($0)")
+                cafeResult.accept($0)
+            }
+            break
+        }
+    }
+    
+    
+    //MARK: - pageResult
+    private func addCombineResultToPageResult(_ combineResult:[ListCellViewModel],_ pageResult:[ListCellViewModel]) ->[ListCellViewModel] {
+        let array  = pageResult + combineResult
+        pageList = array
+        return array
     }
     
     
@@ -259,9 +273,8 @@ class SearchListViewModel {
         let returnArray =   filterArray.sorted { left, right -> Bool in
             if filterAndSort.1 == .title {
                 return left.title < right.title
-            } else {
-                return left.dateString < right.dateString
             }
+            return left.dateString < right.dateString
         }
         return returnArray
     }
@@ -277,22 +290,29 @@ class SearchListViewModel {
     }
     
     
+    //MARK: - resultList
+    private func addSortedArrayToResultList(_ sortedArray:[ListCellViewModel], _ resultArray:[ListCellViewModel]) -> [ListCellViewModel] {
+        nowLoading.accept(false)
+        let returnArray = resultArray + sortedArray
+        cellList = returnArray
+        return returnArray
+    }
+    
+    
     //MARK: - public
     func updateCell(_ listModel:ListCellViewModel) {
         print("updateCell")
         cellList = cellList.map {
             if $0  == listModel {
                 return listModel
-            } else {
-                return $0
             }
+            return $0
         }
         pageList = pageList.map {
             if $0 == listModel {
                 return listModel
-            } else {
-                return $0
             }
+            return $0
         }
         searchResultList.accept(cellList)
         pageResults.accept(pageList)

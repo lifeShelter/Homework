@@ -44,8 +44,7 @@ class Constants {
            return "오늘"
         } else if isYesterday(date) {
             return "어제"
-        } else {
-            return dateToDateString(date,dateFormat: "yyyy년 MM월 dd일")
         }
+        return dateToDateString(date,dateFormat: "yyyy년 MM월 dd일")
     }
 }
