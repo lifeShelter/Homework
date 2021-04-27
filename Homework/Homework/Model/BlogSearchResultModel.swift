@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct BlogSearchResultModel : Codable {
+struct BlogSearchResultModel : Codable, Hashable {
     let blogName:String
     let contents:String
     let dateTime:String
@@ -24,5 +24,17 @@ struct BlogSearchResultModel : Codable {
         case thumbnail
         case title
         case url
+    }
+    
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(url)
+    }
+}
+
+
+extension BlogSearchResultModel:Equatable {
+    static func == (lhs:BlogSearchResultModel, rhs:BlogSearchResultModel) -> Bool {
+        return lhs.blogName == rhs.blogName && lhs.contents == rhs.contents && lhs.dateTime == rhs.dateTime && lhs.thumbnail == rhs.thumbnail && lhs.title == rhs.title && lhs.url == rhs.url
     }
 }
