@@ -52,13 +52,9 @@ class DetailViewModel {
             .flatMap(LoadImageService.loadImage(from:))
             .bind(to: thumbnailImage).disposed(by: disposeBag)
         
-        tapBackButton.map { [weak self] in
-            self?.listViewModel
-        }.filter {$0 != nil}.map{$0!}.bind(to: closeDetail).disposed(by: disposeBag)
+        tapBackButton.map(getListCellViewModel).bind(to: closeDetail).disposed(by: disposeBag)
         
-        tapMoveButton.map { [weak self] in
-            self?.listViewModel
-        }.filter {$0 != nil}.map{$0!}.bind(to: showWebPage).disposed(by: disposeBag)
+        tapMoveButton.map(getListCellViewModel).bind(to: showWebPage).disposed(by: disposeBag)
     }
     
     
@@ -71,5 +67,10 @@ class DetailViewModel {
     
     func updateListCellViewModel(_ viewModel:ListCellViewModel) {
         self.listViewModel =  viewModel
+    }
+    
+    
+    func getListCellViewModel() -> ListCellViewModel {
+        return self.listViewModel
     }
 }
