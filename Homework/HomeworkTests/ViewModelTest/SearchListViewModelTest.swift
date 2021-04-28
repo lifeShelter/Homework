@@ -147,7 +147,6 @@ class SearchListViewModelTest: XCTestCase {
         viewModel.updateCell(listViewModel)
         
         let result = try! viewModel.searchResultList.toBlocking().first()!
-        print(result)
         
         XCTAssertEqual(listViewModel.isOpenWebPage, result[1].isOpenWebPage)
     }

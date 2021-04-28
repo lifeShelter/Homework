@@ -44,7 +44,6 @@ class SearchListViewController: UIViewController {
             if let destNaviContrl = segue.destination as? UINavigationController, let dest = destNaviContrl.topViewController as? DetailViewController {
                 dest.listCellViewModel = sender as? ListCellViewModel
                 dest.closeAction = {[weak self]  in
-                    print("close action \($0)")
                     self?.viewModel.updateCell($0)
                 }
             }
@@ -95,7 +94,6 @@ class SearchListViewController: UIViewController {
         tableView.rx.willDisplayCell.subscribe(onNext:{[weak self] cell, indexPath  in
             if let numOfRow  = self?.tableView.numberOfRows(inSection: 0) {
                 if indexPath.row == numOfRow - 1 {
-                    print("last cell")
                     self?.viewModel.needsMoreLoading.accept(())
                 }
             }
