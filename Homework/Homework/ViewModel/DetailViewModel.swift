@@ -28,7 +28,7 @@ class DetailViewModel {
     let contentsText = BehaviorRelay<NSAttributedString>(value: NSAttributedString(string: ""))
     let dateText  = BehaviorRelay<String>(value:"")
     let urlText = BehaviorRelay<String>(value:"")
-    let thumbnailImage  = BehaviorRelay<UIImage?>(value: nil)
+    let thumbnailImage  = BehaviorRelay<UIImage?>(value:#imageLiteral(resourceName: "NoImage"))
     let showWebPage  = PublishRelay<ListCellViewModel>()
     let closeDetail = PublishRelay<ListCellViewModel>()
     

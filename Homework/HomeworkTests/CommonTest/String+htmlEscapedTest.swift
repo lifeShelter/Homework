@@ -26,9 +26,7 @@ class String_htmlEscapedTest: XCTestCase {
         let expectedString3 =  "02/21(일)한탄강<b>맛집</b>탐방-숙지사항,배차현황".htmlEscaped(font: systemFont, colorHex: colorHex, lineSpacing: 1.0, textAlignment: .left)
         let string = "02/21(일)한탄강<b>맛집</b>탐방-숙지사항,배차현황"
         
-    
         let attributedString = string.htmlEscaped(font: systemFont , colorHex: colorHex, lineSpacing: 1.0,  textAlignment: .center)
-        print(attributedString.string)
         
         XCTAssertEqual(attributedString, expectedString)
         XCTAssertNotEqual(attributedString, expectedString2)

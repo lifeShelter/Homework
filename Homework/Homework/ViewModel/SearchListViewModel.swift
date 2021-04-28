@@ -197,7 +197,6 @@ class SearchListViewModel {
             break
         case .success(_):
             _ = result.map {
-                print("blogResult = \($0)")
                 blogResult.accept($0)
             }
             break
@@ -222,7 +221,6 @@ class SearchListViewModel {
             break
         case .success(_):
             _ = result.map {
-                print("cafeResult = \($0)")
                 cafeResult.accept($0)
             }
             break
@@ -301,7 +299,6 @@ class SearchListViewModel {
     
     //MARK: - public
     func updateCell(_ listModel:ListCellViewModel) {
-        print("updateCell")
         cellList = cellList.map {
             if $0  == listModel {
                 return listModel

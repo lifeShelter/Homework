@@ -17,7 +17,7 @@ class SearchListViewController: UIViewController {
     private let viewModel = SearchListViewModel()
     private var historyDropDown = DropDown()
     private var filterDropDown = DropDown()
-    private let headerHeight:CGFloat = 40
+    private let headerHeight:CGFloat = 56
     
     // IBOutlet
     @IBOutlet weak var searchBar: UISearchBar!
@@ -44,7 +44,6 @@ class SearchListViewController: UIViewController {
             if let destNaviContrl = segue.destination as? UINavigationController, let dest = destNaviContrl.topViewController as? DetailViewController {
                 dest.listCellViewModel = sender as? ListCellViewModel
                 dest.closeAction = {[weak self]  in
-                    print("close action \($0)")
                     self?.viewModel.updateCell($0)
                 }
             }
@@ -95,7 +94,6 @@ class SearchListViewController: UIViewController {
         tableView.rx.willDisplayCell.subscribe(onNext:{[weak self] cell, indexPath  in
             if let numOfRow  = self?.tableView.numberOfRows(inSection: 0) {
                 if indexPath.row == numOfRow - 1 {
-                    print("last cell")
                     self?.viewModel.needsMoreLoading.accept(())
                 }
             }
@@ -173,6 +171,7 @@ extension SearchListViewController:UITableViewDelegate {
         }
         
         filterDropDown.anchorView  = cell.textField
+        filterDropDown.bottomOffset = CGPoint(x: 0, y:(filterDropDown.anchorView?.plainView.bounds.height)!)
         filterDropDown.selectionAction = { [weak self] index, item in
             cell.textField.text = item
             self?.viewModel.filterType.accept(FilterEnum(rawValue: item) ?? .all)
