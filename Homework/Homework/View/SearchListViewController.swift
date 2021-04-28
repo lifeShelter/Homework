@@ -17,7 +17,7 @@ class SearchListViewController: UIViewController {
     private let viewModel = SearchListViewModel()
     private var historyDropDown = DropDown()
     private var filterDropDown = DropDown()
-    private let headerHeight:CGFloat = 40
+    private let headerHeight:CGFloat = 56
     
     // IBOutlet
     @IBOutlet weak var searchBar: UISearchBar!
@@ -173,6 +173,7 @@ extension SearchListViewController:UITableViewDelegate {
         }
         
         filterDropDown.anchorView  = cell.textField
+        filterDropDown.bottomOffset = CGPoint(x: 0, y:(filterDropDown.anchorView?.plainView.bounds.height)!)
         filterDropDown.selectionAction = { [weak self] index, item in
             cell.textField.text = item
             self?.viewModel.filterType.accept(FilterEnum(rawValue: item) ?? .all)
