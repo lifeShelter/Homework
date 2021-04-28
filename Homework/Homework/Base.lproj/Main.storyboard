@@ -58,7 +58,6 @@
                                                             <rect key="frame" x="341" y="0.5" width="63" height="56"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="56" id="YjA-hN-jx8"/>
-                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="qPR-wI-QBI"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                             <state key="normal" title="정렬"/>
