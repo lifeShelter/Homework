@@ -18,6 +18,7 @@ class SearchListViewController: UIViewController {
     private var historyDropDown = DropDown()
     private var filterDropDown = DropDown()
     private let headerHeight:CGFloat = 56
+    private let rowHeight:CGFloat = 120
     
     // IBOutlet
     @IBOutlet weak var searchBar: UISearchBar!
@@ -189,6 +190,11 @@ extension SearchListViewController:UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return headerHeight
+    }
+    
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return rowHeight
     }
 }
 
