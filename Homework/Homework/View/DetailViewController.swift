@@ -57,7 +57,6 @@ class DetailViewController: UIViewController {
             return
         }
         viewModel = DetailViewModel(listCellViewModel)
-        print(listCellViewModel)
     }
     
     
